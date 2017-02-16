@@ -17,7 +17,6 @@ public class ButtonPlant : MonoBehaviour
 
 	public void onClick()
 	{
-		Debug.Log( "Clicked" );
 		PlantManager.get().setSelectedPlant( plant );
 	}
 }
