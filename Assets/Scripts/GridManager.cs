@@ -15,6 +15,9 @@ public class GridManager : MonoBehaviour
 	public GameObject sapin;
 	public int size;
 
+	Case[,] grid;
+
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -26,21 +29,41 @@ public class GridManager : MonoBehaviour
 				createObject(i, j, ground);
 		}
 
-		// Tests
-		createObject( 5, 7, sapin );
+		grid = new Case[size, size];
+		for( int i = 0; i < size; ++i )
+		{
+			for( int j = 0; j < size; ++j )
+				grid[ i, j ] = new Case();
+		}
 	}
 
 	void createObject( float i, float j, GameObject prefab )
 	{
 		GameObject obj = GameObject.Instantiate( prefab );
-		IsoTransform iso = obj.GetComponent<IsoTransform>();
-		iso.Position = new Vector3(i+1, iso.Position.y, j+1);
-		obj.transform.parent = this.transform;
+		placeObject( obj, i, j );
 	}
 
-	public void placePlant( float i, float j, Plant p )
+	public bool placePlant( int i, int j, Plant p )
 	{
-		//TODO
+		if( i <= 0 || i > size || j <= 0 || j > size )
+			return false;
+
+		Case c = grid[i-1, j-1];
+		GameObject obj = c.insert( p );
+		if( obj != null )
+		{
+			placeObject( obj, i, j );
+			return true;
+		}
+		else
+			return false;
+	}
+
+	void placeObject( GameObject obj, float i, float j )
+	{
+		IsoTransform iso = obj.GetComponent<IsoTransform>();
+		iso.Position = new Vector3(i+1 + (iso.Position.x - Mathf.Floor(iso.Position.x)), iso.Position.y, j+1 + (iso.Position.z - Mathf.Floor(iso.Position.z)));
+		obj.transform.parent = this.transform;
 	}
 
 	public int getSize() { return size; }

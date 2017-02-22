@@ -82,23 +82,43 @@ public class PlantManager : MonoBehaviour
 			cursorPlant = null;
 		}
 
-		if (Input.GetMouseButton(0) && cursorPlant != null)
+		if ( Input.GetMouseButtonDown(0) && cursorPlant != null )
 		{
+			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);
+			if( Main.get().money >= selectedPlant.cost )
+			{
+				Debug.Log( pos.x + "," + pos.y + "," + pos.z );
+				if( GridManager.get().placePlant( (int)( Math.Round( pos.x ) ) - 1, (int)( Math.Round( pos.z ) ) - 1, selectedPlant ) )
+				{
+					Main.get().money -= selectedPlant.cost;
 
+					if( !Input.GetKey( KeyCode.LeftShift ) && !Input.GetKey( KeyCode.RightShift ) )
+					{
+						selectedPlant = null;
+						GameObject.Destroy( cursorPlant );
+						cursorPlant = null;
+					}
+				}
+			}
 		}
 
 		if (selectedPlant != null)
 		{
+			if( cursorPlant == null )
+				Debug.Log( "wtf" );
+
 			IsoTransform iso = cursorPlant.GetComponent<IsoTransform> ();
-			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0.3f);
-			pos.x = (float)Math.Round (pos.x);
-			pos.z = (float)Math.Round (pos.z);
+			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);
+			float xdec = iso.Position.x - (float)Math.Round (iso.Position.x);
+			float zdec = iso.Position.z - (float)Math.Round (iso.Position.z);
+			pos.x = (float)Math.Round (pos.x) + xdec;
+			pos.z = (float)Math.Round (pos.z) + zdec;
 			pos.y = iso.Position.y;
 
 			if (pos.x > 0 && pos.z > 0 && pos.x <= GridManager.get().size && pos.z <= GridManager.get().size )
 				iso.Position = pos;
 			else
-				iso.Position = new Vector3 (-1.0f, iso.Position.y, -1.0f);
+				iso.Position = new Vector3 ( -1.0f + xdec, iso.Position.y, -1.0f + zdec);
 		}
 	}
 
@@ -108,11 +128,11 @@ public class PlantManager : MonoBehaviour
 
 		if( cursorPlant != null )
 			GameObject.Destroy( cursorPlant );
-		cursorPlant = GameObject.Instantiate( p.prefab );
+		cursorPlant = GameObject.Instantiate( p.previewPrefab );
 
 		// Changing alpha
 		Color c = cursorPlant.GetComponent<SpriteRenderer>().color;
-		c.a = 0.5f;
+		c.a = 0.4f;
 		cursorPlant.GetComponent<SpriteRenderer>().color = c;
 	}
 }

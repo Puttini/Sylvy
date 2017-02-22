@@ -1,36 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.UltimateIsometricToolkit.Scripts.Utils;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	/* 20 : xmin = -5, xmax = 5
-	 *      ymin = 4 , ymax = 12
-	 * 40 : xmin =-18, xmax = 18
-	 *      ymin = 4 , ymax = 27
-	 *
-	 * xmax = 5 + (18-5)*(s-20)/20 = 5 + 13*s - 13 = 13s - 8
-	 * ymax = 12 + (27-12)*(s-20)/20 = 12 + 15*s - 15 = 15s - 3 */
-
 	public int border;
 	public float speed;
 	private float xmin, xmax;
 	private float ymin, ymax;
 
-	public GridManager gridManager;
+	public GridManager gridManager; // Pour éviter les conflits dans la méthode Start
 
 	void Start ()
 	{
-		float xmax20 = 4;
-		float ymax20 = 12;
+		float x = transform.position.x;
+		float y = transform.position.y;
 
-		float xmax200 = 131;
-		float ymax200 = 144;
-
-		xmax = Mathf.Max( xmax200 + (xmax20 - xmax200) * (200 - gridManager.getSize()) / 180, 0 );
-		xmin = -xmax;
-		ymin = 4;
-		ymax = Mathf.Max( ymax200 + (ymax20 - ymax200) * (200 - gridManager.getSize()) / 180, 4 );
+		Vector3 left = (Vector3)Isometric.IsoToScreen( new Vector3(1,0,GridManager.get().size) );
+		xmin = left.x + x;
+		Vector3 right = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size,0,1) );
+		xmax = right.x + x;
+		Vector3 bottom = (Vector3)Isometric.IsoToScreen( new Vector3(1,0,1) );
+		ymin = bottom.y + y;
+		Vector3 top = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size,0,GridManager.get().size) );
+		ymax = top.y + y;
 	}
 
 	void Update ()
