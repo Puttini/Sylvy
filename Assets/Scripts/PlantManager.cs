@@ -12,7 +12,6 @@ public class PlantManager : MonoBehaviour
 	static PlantManager instance;
 	public static PlantManager get() { return instance; }
 
-
 	public int w, h;
 	public float iconW, iconH;
 	public float xMargin, yMargin;
@@ -22,6 +21,9 @@ public class PlantManager : MonoBehaviour
 
 	// Plant prefabs
 	public Plant sapin;
+	public Plant fougere;
+	public Plant marguerite;
+	public Plant cepe;
 
 	Plant selectedPlant;
 	GameObject cursorPlant;
@@ -44,6 +46,9 @@ public class PlantManager : MonoBehaviour
 		// Tests
 		for( int i = 0 ; i < 15 ; i++ )
 			addToPanel( sapin );
+		addToPanel( fougere );
+		addToPanel( marguerite );
+		addToPanel( cepe );
 	}
 
 	public void addToPanel( Plant p )

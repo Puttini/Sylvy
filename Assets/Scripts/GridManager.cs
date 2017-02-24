@@ -62,7 +62,7 @@ public class GridManager : MonoBehaviour
 	void placeObject( GameObject obj, float i, float j )
 	{
 		IsoTransform iso = obj.GetComponent<IsoTransform>();
-		iso.Position = new Vector3(i+1 + (iso.Position.x - Mathf.Floor(iso.Position.x)), iso.Position.y, j+1 + (iso.Position.z - Mathf.Floor(iso.Position.z)));
+		iso.Position = new Vector3(i+1 + iso.Position.x, iso.Position.y, j+1 + iso.Position.z);
 		obj.transform.parent = this.transform;
 	}
 
