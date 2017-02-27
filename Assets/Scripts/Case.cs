@@ -19,4 +19,9 @@ public class Case
 	{
 		return layers[ p.layer ].insert( p );
 	}
+
+	public GameObject getFirstObject( int layer )
+	{
+		return layers [layer].getFirstObject();
+	}
 };

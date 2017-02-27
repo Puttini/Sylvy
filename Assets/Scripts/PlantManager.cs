@@ -44,8 +44,7 @@ public class PlantManager : MonoBehaviour
 		}
 
 		// Tests
-		for( int i = 0 ; i < 15 ; i++ )
-			addToPanel( sapin );
+		addToPanel( sapin );
 		addToPanel( fougere );
 		addToPanel( marguerite );
 		addToPanel( cepe );
@@ -71,7 +70,7 @@ public class PlantManager : MonoBehaviour
 	void addToPanel( int i, int j, Plant p )
 	{
 		icons[i,j] = GameObject.Instantiate( buttonPrefab );
-		icons[ i, j ].transform.parent = this.transform;
+		icons[ i, j ].transform.SetParent( this.transform );
 		icons[ i, j ].GetComponent<RectTransform>().anchoredPosition =
 			new Vector2( xMargin + i * iconW, -yMargin - j * iconH );
 		ButtonPlant b = icons[ i, j ].GetComponent<ButtonPlant>();
@@ -80,38 +79,23 @@ public class PlantManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Escape) && selectedPlant != null)
-		{
-			selectedPlant = null;
-			GameObject.Destroy( cursorPlant );
-			cursorPlant = null;
-		}
-
-		if ( Input.GetMouseButtonDown(0) && cursorPlant != null )
+		if ( Input.GetMouseButtonDown(0) && cursorPlant != null && Input.mousePosition.y >= 150 )
 		{
 			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);
 			if( Main.get().money >= selectedPlant.cost )
 			{
-				Debug.Log( pos.x + "," + pos.y + "," + pos.z );
 				if( GridManager.get().placePlant( (int)( Math.Round( pos.x ) ) - 1, (int)( Math.Round( pos.z ) ) - 1, selectedPlant ) )
 				{
 					Main.get().money -= selectedPlant.cost;
 
-					if( !Input.GetKey( KeyCode.LeftShift ) && !Input.GetKey( KeyCode.RightShift ) )
-					{
-						selectedPlant = null;
-						GameObject.Destroy( cursorPlant );
-						cursorPlant = null;
-					}
+					if (!Input.GetKey (KeyCode.LeftShift) && !Input.GetKey (KeyCode.RightShift))
+						leaveSelection ();
 				}
 			}
 		}
 
 		if (selectedPlant != null)
 		{
-			if( cursorPlant == null )
-				Debug.Log( "wtf" );
-
 			IsoTransform iso = cursorPlant.GetComponent<IsoTransform> ();
 			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);
 			float xdec = iso.Position.x - (float)Math.Round (iso.Position.x);
@@ -139,5 +123,15 @@ public class PlantManager : MonoBehaviour
 		Color c = cursorPlant.GetComponent<SpriteRenderer>().color;
 		c.a = 0.4f;
 		cursorPlant.GetComponent<SpriteRenderer>().color = c;
+	}
+
+	public void leaveSelection()
+	{
+		selectedPlant = null;
+		if (cursorPlant != null)
+		{
+			GameObject.Destroy (cursorPlant);
+			cursorPlant = null;
+		}
 	}
 }

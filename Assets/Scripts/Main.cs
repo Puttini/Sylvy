@@ -22,7 +22,8 @@ public class Main : MonoBehaviour
 
 	void Update()
 	{
-
+		if (Input.GetKeyDown (KeyCode.Escape))
+			leaveSelection ();
 	}
 
 	public static GameObject addIncome( float income, float period, float duration = -1.0f )
@@ -38,5 +39,10 @@ public class Main : MonoBehaviour
 	public static float time()
 	{
 		return get().timeScale * (float)Time.time;
+	}
+
+	public static void leaveSelection()
+	{
+		PlantManager.get ().leaveSelection ();
 	}
 }

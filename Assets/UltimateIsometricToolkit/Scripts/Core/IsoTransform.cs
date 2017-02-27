@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Assets.UltimateIsometricToolkit.Scripts.External;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Assets.UltimateIsometricToolkit.Scripts.Core {
@@ -38,7 +40,7 @@ namespace Assets.UltimateIsometricToolkit.Scripts.Core {
 				IsoSorting.Instance.Resolve(this);
 #if UNITY_EDITOR
 				EditorUtility.SetDirty(this);
-#endif 
+#endif
 				//apply delta to each child
 				if (transform.childCount != _lastChildCount) //indicates hirarchy for this isoObj changed
 					UpdateChildren();
