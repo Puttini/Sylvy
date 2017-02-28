@@ -26,11 +26,29 @@ public class Layer
 				if( prefab == null )
 					return null;
 				GameObject obj = GameObject.Instantiate( prefab );
-				AssignedPlant ap = obj.AddComponent<AssignedPlant> ();
-				ap.set(p);
+				obj.AddComponent<AssignedPlant> ().set(p);
 				objs[i] = obj;
 				nbObjs++;
 				return obj;
+			}
+		}
+		return null;
+	}
+
+	public GameObject cut()
+	{
+		for( int i = 0; i < 4; ++i )
+		{
+			if( objs[ i ] != null )
+			{
+				Cuttable c = objs[ i ].GetComponent<Cuttable>();
+				if( c != null )
+				{
+					GameObject o = c.cut();
+					GameObject.Destroy( objs[ i ] );
+					objs[ i ] = o;
+					return o;
+				}
 			}
 		}
 		return null;
@@ -42,6 +60,21 @@ public class Layer
 		{
 			if (objs [i] != null)
 				return objs [i];
+		}
+
+		return null;
+	}
+
+	public GameObject popFirstObject()
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			if( objs[ i ] != null )
+			{
+				GameObject o = objs[ i ];
+				objs[ i ] = null;
+				return o;
+			}
 		}
 
 		return null;

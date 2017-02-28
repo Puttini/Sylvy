@@ -24,4 +24,9 @@ public class Case
 	{
 		return layers [layer].getFirstObject();
 	}
+
+	public GameObject cut()
+	{
+		return layers[ (int)Layers.Arbres ].cut();
+	}
 };

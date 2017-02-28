@@ -44,5 +44,6 @@ public class Main : MonoBehaviour
 	public static void leaveSelection()
 	{
 		PlantManager.get ().leaveSelection ();
+		ButtonCut.get().leaveSelection();
 	}
 }

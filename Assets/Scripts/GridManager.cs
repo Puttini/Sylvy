@@ -37,7 +37,7 @@ public class GridManager : MonoBehaviour
 		}
 	}
 
-	void createObject( float i, float j, GameObject prefab )
+	void createObject( int i, int j, GameObject prefab )
 	{
 		GameObject obj = GameObject.Instantiate( prefab );
 		placeObject( obj, i, j );
@@ -45,10 +45,10 @@ public class GridManager : MonoBehaviour
 
 	public bool placePlant( int i, int j, Plant p )
 	{
-		if( i <= 0 || i > size || j <= 0 || j > size )
+		if( i < 0 || i >= size || j < 0 || j >= size )
 			return false;
 
-		Case c = grid[i-1, j-1];
+		Case c = grid[i, j];
 		GameObject obj = c.insert( p );
 		if( obj != null )
 		{
@@ -59,11 +59,23 @@ public class GridManager : MonoBehaviour
 			return false;
 	}
 
-	void placeObject( GameObject obj, float i, float j )
+	void placeObject( GameObject obj, int i, int j )
 	{
 		IsoTransform iso = obj.GetComponent<IsoTransform>();
 		iso.Position = new Vector3(i+1 + iso.Position.x, iso.Position.y, j+1 + iso.Position.z);
-		obj.transform.parent = this.transform;
+		obj.transform.SetParent( this.transform );
+	}
+
+	public bool cut( int i, int j )
+	{
+		GameObject tronc = grid[ i, j ].cut();
+		if( tronc != null )
+		{
+			tronc.transform.SetParent( this.transform );
+			return true;
+		}
+
+		return false;
 	}
 
 	public int getSize() { return size; }

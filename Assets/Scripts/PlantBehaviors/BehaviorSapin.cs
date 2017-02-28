@@ -4,12 +4,13 @@ using Assets.UltimateIsometricToolkit.Scripts.Core;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
 using UnityEngine;
 
-public class BehaviorSapin : MonoBehaviour
+public class BehaviorSapin : MonoBehaviour, Cuttable
 {
 	public float income;
 	public float period;
 
 	public float growingTime;
+	public GameObject tronc;
 
 	float startTime;
 	float finalY;
@@ -39,7 +40,7 @@ public class BehaviorSapin : MonoBehaviour
 	void Update ()
 	{
 		age = Main.time() - startTime;
-			float scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
+		float scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
 		if ( inc == null && scale >= 0.6 )
 			inc = Main.addIncome( income, period );
 
@@ -52,5 +53,21 @@ public class BehaviorSapin : MonoBehaviour
 	public float getAge()
 	{
 		return age;
+	}
+
+	public GameObject cut()
+	{
+		GameObject newTronc = GameObject.Instantiate( tronc );
+		TroncSapin t = newTronc.AddComponent<TroncSapin>();
+		IsoTransform iso1 = GetComponent<IsoTransform>();
+		IsoTransform iso2 = newTronc.GetComponent<IsoTransform>();
+		iso2.Position = new Vector3( iso1.Position.x, iso2.Position.y, iso1.Position.z );
+		t.setAge( age );
+		float scale = 0.4f + 0.6f*Mathf.Min( 1.0f, age / growingTime );
+		t.setScale( scale );
+
+		if( inc != null )
+			GameObject.Destroy( inc );
+		return newTronc;
 	}
 }

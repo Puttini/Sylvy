@@ -22,6 +22,7 @@ public class PlantManager : MonoBehaviour
 	// Plant prefabs
 	public Plant sapin;
 	public Plant fougere;
+	public Plant herbe;
 	public Plant marguerite;
 	public Plant cepe;
 
@@ -48,6 +49,7 @@ public class PlantManager : MonoBehaviour
 		addToPanel( fougere );
 		addToPanel( marguerite );
 		addToPanel( cepe );
+		addToPanel( herbe );
 	}
 
 	public void addToPanel( Plant p )
@@ -113,10 +115,9 @@ public class PlantManager : MonoBehaviour
 
 	public void setSelectedPlant( Plant p )
 	{
-		selectedPlant = p;
+		Main.leaveSelection();
 
-		if( cursorPlant != null )
-			GameObject.Destroy( cursorPlant );
+		selectedPlant = p;
 		cursorPlant = GameObject.Instantiate( p.previewPrefab );
 
 		// Changing alpha

@@ -10,6 +10,7 @@ public class Plant : MonoBehaviour
 	public GameObject prefab1;
 	public GameObject prefab2;
 	public GameObject prefab3;
+	public GameObject tronc;
 
 	public int layer;
 	public int cost;

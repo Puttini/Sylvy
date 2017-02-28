@@ -10,8 +10,6 @@ public class CameraController : MonoBehaviour
 	private float xmin, xmax;
 	private float ymin, ymax;
 
-	public GridManager gridManager; // Pour éviter les conflits dans la méthode Start
-
 	void Start ()
 	{
 		float x = transform.position.x;
