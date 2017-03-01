@@ -21,10 +21,14 @@ public class PlantManager : MonoBehaviour
 
 	// Plant prefabs
 	public Plant sapin;
+	public Plant chene;
 	public Plant fougere;
 	public Plant herbe;
 	public Plant marguerite;
+	public Plant lin;
 	public Plant cepe;
+	public Plant tricholome;
+	public Plant amanite;
 
 	Plant selectedPlant;
 	GameObject cursorPlant;
@@ -46,10 +50,14 @@ public class PlantManager : MonoBehaviour
 
 		// Tests
 		addToPanel( sapin );
+		addToPanel( chene );
 		addToPanel( fougere );
-		addToPanel( marguerite );
-		addToPanel( cepe );
 		addToPanel( herbe );
+		addToPanel( marguerite );
+		addToPanel( lin );
+		addToPanel( cepe );
+		addToPanel( tricholome );
+		addToPanel( amanite );
 	}
 
 	public void addToPanel( Plant p )
@@ -99,17 +107,24 @@ public class PlantManager : MonoBehaviour
 		if (selectedPlant != null)
 		{
 			IsoTransform iso = cursorPlant.GetComponent<IsoTransform> ();
-			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);
 			float xdec = iso.Position.x - (float)Math.Round (iso.Position.x);
 			float zdec = iso.Position.z - (float)Math.Round (iso.Position.z);
-			pos.x = (float)Math.Round (pos.x) + xdec;
-			pos.z = (float)Math.Round (pos.z) + zdec;
-			pos.y = iso.Position.y;
+			try
+			{
+				Vector3 pos = Isometric.CreateXYZfromY (Input.mousePosition, 0).Value;
+				pos.x = (float)Math.Round (pos.x) + xdec;
+				pos.z = (float)Math.Round (pos.z) + zdec;
+				pos.y = iso.Position.y;
 
-			if (pos.x > 0 && pos.z > 0 && pos.x <= GridManager.get().size && pos.z <= GridManager.get().size )
-				iso.Position = pos;
-			else
+				if (pos.x > 0 && pos.z > 0 && pos.x <= GridManager.get().size && pos.z <= GridManager.get().size )
+					iso.Position = pos;
+				else
+					iso.Position = new Vector3 ( -1.0f + xdec, iso.Position.y, -1.0f + zdec);
+			}
+			catch (System.InvalidOperationException)
+			{
 				iso.Position = new Vector3 ( -1.0f + xdec, iso.Position.y, -1.0f + zdec);
+			}
 		}
 	}
 

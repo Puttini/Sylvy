@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 	public float speed;
 	private float xmin, xmax;
 	private float ymin, ymax;
+	float lastFrame;
 
 	void Start ()
 	{
@@ -23,6 +24,8 @@ public class CameraController : MonoBehaviour
 		ymin = bottom.y + y;
 		Vector3 top = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size,0,GridManager.get().size) );
 		ymax = top.y + y;
+
+		lastFrame = (float)Time.time;
 	}
 
 	void Update ()
@@ -30,14 +33,19 @@ public class CameraController : MonoBehaviour
 		float x = transform.position.x;
 		float y = transform.position.y;
 
+		float frame = (float)Time.time;
+		float dt = frame - lastFrame;
+
 		if (Input.mousePosition.x <= border || Input.GetKey(KeyCode.LeftArrow))
-			x -= speed;
+			x -= speed * dt;
 		if (Input.mousePosition.y <= border || Input.GetKey(KeyCode.DownArrow))
-			y -= speed;
+			y -= speed * dt;
 		if (Input.mousePosition.x >= Screen.width - border || Input.GetKey(KeyCode.RightArrow))
-			x += speed;
+			x += speed * dt;
 		if (Input.mousePosition.y >= Screen.height - border || Input.GetKey(KeyCode.UpArrow))
-			y += speed;
+			y += speed * dt;
+
+		Main.get().money = (int)Input.mousePosition.x;
 
 		if (x <= xmin)
 			x = xmin;
@@ -49,5 +57,6 @@ public class CameraController : MonoBehaviour
 			y = ymax;
 
 		transform.position = new Vector2 (x, y);
+		lastFrame = frame;
 	}
 }
