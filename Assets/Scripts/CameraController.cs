@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+	// Singleton class
+	static CameraController instance;
+	public static CameraController get() { return instance; }
+
 	public int border;
 	public float speed;
 	private float xmin, xmax;
 	private float ymin, ymax;
 	float lastFrame;
 
-	void Start ()
+	void Start()
+	{
+		instance = this;
+	}
+
+	public void init()
 	{
 		float x = transform.position.x;
 		float y = transform.position.y;
@@ -44,8 +53,6 @@ public class CameraController : MonoBehaviour
 			x += speed * dt;
 		if (Input.mousePosition.y >= Screen.height - border || Input.GetKey(KeyCode.UpArrow))
 			y += speed * dt;
-
-		Main.get().money = (int)Input.mousePosition.x;
 
 		if (x <= xmin)
 			x = xmin;

@@ -55,6 +55,7 @@
     <Compile Include="Assets\Scripts\Income.cs" />
     <Compile Include="Assets\Scripts\Layer.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\MoneyManager.cs" />
     <Compile Include="Assets\Scripts\Plant.cs" />
     <Compile Include="Assets\Scripts\PlantBehaviors\BehaviorSapin.cs" />

@@ -23,6 +23,9 @@ public class ButtonCut : MonoBehaviour
 
 	void Update()
 	{
+		if( !selected && Input.GetKeyDown( KeyCode.Alpha1 ) )
+			select();
+
 		if( selected && Input.GetMouseButtonDown( 0 ) && Input.mousePosition.y >= 150 )
 		{
 			Vector3 pos = (Vector3)Isometric.CreateXYZfromY (Input.mousePosition, 0);

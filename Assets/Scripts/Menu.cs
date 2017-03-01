@@ -1,0 +1,104 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Menu : MonoBehaviour
+{
+	// Singleton class
+	private static Menu instance;
+	public static Menu get() { return instance; }
+
+	public GameObject mainPanel;
+	public GameObject newGamePanel;
+	public GameObject instructionsPanel;
+	public GameObject resumeButton;
+	bool started;
+
+	// Use this for initialization
+	void Start ()
+	{
+		instance = this;
+
+		started = false;
+		resumeButton.SetActive( false );
+		newGamePanel.SetActive( false );
+		instructionsPanel.SetActive( false );
+		mainPanel.SetActive( true );
+	}
+	
+	// Update is called once per frame
+	void Update ()
+	{
+		
+	}
+
+	public void nouvellePartie()
+	{
+		mainPanel.SetActive( false );
+		newGamePanel.SetActive( true );
+	}
+
+	public void instructions()
+	{
+		mainPanel.SetActive( false );
+		instructionsPanel.SetActive( true );
+	}
+
+	public void quitter()
+	{
+		Application.Quit();
+	}
+
+	public void facile()
+	{
+		Main.get().money = 10000;
+		Main.get().subvention = 200;
+		Main.get().timeScale = 2;
+		GridManager.get().size = 25;
+		startNewGame();
+	}
+
+	public void normal()
+	{
+
+		startNewGame();
+	}
+
+	public void difficile()
+	{
+
+		startNewGame();
+	}
+
+	public void newGameRetour()
+	{
+		newGamePanel.SetActive( false );
+		mainPanel.SetActive( true );
+	}
+
+	public void instructionsRetour()
+	{
+		instructionsPanel.SetActive( false );
+		mainPanel.SetActive( true );
+	}
+
+	public void startNewGame()
+	{
+		if( started )
+			Main.reset();
+		Main.init();
+
+		started = true;
+		newGamePanel.SetActive( false );
+		mainPanel.SetActive( true );
+		resumeButton.SetActive( true );
+
+		gameObject.SetActive( false );
+	}
+
+	public void reprendre()
+	{
+		gameObject.SetActive( false );
+		//Main.unpause();
+	}
+}

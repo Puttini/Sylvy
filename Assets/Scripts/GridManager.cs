@@ -17,12 +17,14 @@ public class GridManager : MonoBehaviour
 
 	Case[,] grid;
 
-
-	// Use this for initialization
-	void Start ()
+	void Start()
 	{
 		instance = this;
+	}
 
+	// Use this for initialization
+	public void init()
+	{
 		for( int i = 0 ; i < size ; ++i )
 		{
 			for( int j = 0 ; j < size ; ++j )
@@ -79,4 +81,11 @@ public class GridManager : MonoBehaviour
 	}
 
 	public int getSize() { return size; }
+
+	public void reset()
+	{
+		foreach( Transform obj in transform )
+			GameObject.Destroy( obj.gameObject );
+		grid = null;
+	}
 }
