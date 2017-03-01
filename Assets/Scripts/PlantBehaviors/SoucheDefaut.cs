@@ -4,7 +4,7 @@ using UnityEngine;
 using Assets.UltimateIsometricToolkit.Scripts.Core;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
 
-public class TroncSapin : MonoBehaviour
+public class SoucheDefaut : MonoBehaviour
 {
 	float age;
 

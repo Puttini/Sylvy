@@ -27,6 +27,7 @@ public class Main : MonoBehaviour
 	void Start()
 	{
 		instance = this;
+		normalSpeed = true;
 	}
 
 	void Update()

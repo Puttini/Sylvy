@@ -55,18 +55,27 @@ public class Menu : MonoBehaviour
 		Main.get().subvention = 200;
 		Main.get().timeScale = 2;
 		GridManager.get().size = 25;
+		Main.get().pauseButton.SetActive( true );
 		startNewGame();
 	}
 
 	public void normal()
 	{
-
+		Main.get().money = 8000;
+		Main.get().subvention = 0;
+		Main.get().timeScale = 1.5f;
+		GridManager.get().size = 35;
+		Main.get().pauseButton.SetActive( true );
 		startNewGame();
 	}
 
 	public void difficile()
 	{
-
+		Main.get().money = 6000;
+		Main.get().subvention = -50;
+		Main.get().timeScale = 1;
+		GridManager.get().size = 50;
+		Main.get().pauseButton.SetActive( false );
 		startNewGame();
 	}
 

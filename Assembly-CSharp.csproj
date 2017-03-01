@@ -3,13 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{C55E30B6-8D36-C523-D2C7-D8D4AB4BBDD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
@@ -33,71 +34,71 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>/opt/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+      <HintPath>/opt/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AssignedPlant.cs" />
-    <Compile Include="Assets\Scripts\ButtonCut.cs" />
-    <Compile Include="Assets\Scripts\ButtonPlant.cs" />
-    <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Case.cs" />
-    <Compile Include="Assets\Scripts\Cuttable.cs" />
-    <Compile Include="Assets\Scripts\GridManager.cs" />
-    <Compile Include="Assets\Scripts\Income.cs" />
-    <Compile Include="Assets\Scripts\Layer.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
-    <Compile Include="Assets\Scripts\Menu.cs" />
-    <Compile Include="Assets\Scripts\MoneyManager.cs" />
-    <Compile Include="Assets\Scripts\Plant.cs" />
-    <Compile Include="Assets\Scripts\PlantBehaviors\BehaviorSapin.cs" />
-    <Compile Include="Assets\Scripts\PlantBehaviors\TroncSapin.cs" />
-    <Compile Include="Assets\Scripts\PlantManager.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\HeuristicSorting.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\IsoSorting.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\IsoTransform.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\SortingStrategy.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Examples\GenericGridMap.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Examples\SmoothCamera2d.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\EasingFunctions.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\ExposePropertyAttribute.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\LinqExtensions.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\PinchZoom.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\IsoController\SimpleIsoObjectController.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\GizmosExtension.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\Isometric.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\MethodExtensionForMonoBehaviourTransform.cs" />
-    <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\Singleton.cs" />
-    <None Include="Assets\UltimateIsometricToolkit\License.txt" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\TestRunner\UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\TestRunner\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\UnityAnalytics\UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\UnityHoloLens\RuntimeEditor\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VR">
-      <HintPath>..\..\..\..\opt\Unity\Editor\Data\UnityExtensions\Unity\UnityVR\RuntimeEditor\UnityEngine.VR.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\Scripts\AssignedPlant.cs" />
+     <Compile Include="Assets\Scripts\ButtonCut.cs" />
+     <Compile Include="Assets\Scripts\ButtonPlant.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Case.cs" />
+     <Compile Include="Assets\Scripts\Cuttable.cs" />
+     <Compile Include="Assets\Scripts\GridManager.cs" />
+     <Compile Include="Assets\Scripts\Income.cs" />
+     <Compile Include="Assets\Scripts\Layer.cs" />
+     <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
+     <Compile Include="Assets\Scripts\MoneyManager.cs" />
+     <Compile Include="Assets\Scripts\Plant.cs" />
+     <Compile Include="Assets\Scripts\PlantBehaviors\ArbreDefaut.cs" />
+     <Compile Include="Assets\Scripts\PlantBehaviors\SoucheDefaut.cs" />
+     <Compile Include="Assets\Scripts\PlantManager.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\HeuristicSorting.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\IsoSorting.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\IsoTransform.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Core\SortingStrategy.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Examples\GenericGridMap.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Examples\SmoothCamera2d.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\EasingFunctions.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\ExposePropertyAttribute.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\LinqExtensions.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\External\PinchZoom.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\IsoController\SimpleIsoObjectController.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\GizmosExtension.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\Isometric.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\MethodExtensionForMonoBehaviourTransform.cs" />
+     <Compile Include="Assets\UltimateIsometricToolkit\Scripts\Utils\Singleton.cs" />
+     <None Include="Assets\UltimateIsometricToolkit\License.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -107,4 +108,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
