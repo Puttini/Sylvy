@@ -4,13 +4,13 @@ using Assets.UltimateIsometricToolkit.Scripts.Core;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
 using UnityEngine;
 
-public class BehaviorSapin : MonoBehaviour, Cuttable
+public class ArbreDefaut : MonoBehaviour, Cuttable
 {
 	public float income;
 	public float period;
 
 	public float growingTime;
-	public GameObject tronc;
+	public GameObject souche;
 
 	float startTime;
 	float finalY;
@@ -57,8 +57,8 @@ public class BehaviorSapin : MonoBehaviour, Cuttable
 
 	public GameObject cut()
 	{
-		GameObject newTronc = GameObject.Instantiate( tronc );
-		TroncSapin t = newTronc.AddComponent<TroncSapin>();
+		GameObject newTronc = GameObject.Instantiate( souche );
+		SoucheDefaut t = newTronc.AddComponent<SoucheDefaut>();
 		IsoTransform iso1 = GetComponent<IsoTransform>();
 		IsoTransform iso2 = newTronc.GetComponent<IsoTransform>();
 		iso2.Position = new Vector3( iso1.Position.x, iso2.Position.y, iso1.Position.z );
