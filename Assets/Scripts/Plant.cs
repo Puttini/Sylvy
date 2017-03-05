@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
+	public string theName;
+
 	public GameObject sprite;
 	public GameObject previewPrefab;
 	public GameObject prefab0;
 	public GameObject prefab1;
 	public GameObject prefab2;
 	public GameObject prefab3;
-	public GameObject tronc;
+
+	public float lmin, lmax;
+	public float hmin, hmax;
+	public float fmin, fmax;
+	public float p;
 
 	public int layer;
 	public int cost;
-
 
 	int nbPrefabs;
 	public int getNbPrefabs() { return nbPrefabs; }
@@ -48,5 +53,15 @@ public class Plant : MonoBehaviour
 		return null;
 	}
 
-	public int points;
+	public bool toss( float l, float h, float f )
+	{
+		if (l < lmin || l > lmax)
+			return false;
+		if (h < hmin || h > hmax)
+			return false;
+		if (f < fmin || f > fmax)
+			return false;
+
+		return (p * f > Main.random ());
+	}
 }

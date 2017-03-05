@@ -16,7 +16,7 @@ public class Layer
 			objs[ i ] = null;
 	}
 
-	public GameObject insert( Plant p )
+	public GameObject insert( Plant p, Case c )
 	{
 		for( int i = 0; i < 4; ++i )
 		{
@@ -26,7 +26,8 @@ public class Layer
 				if( prefab == null )
 					return null;
 				GameObject obj = GameObject.Instantiate( prefab );
-				obj.AddComponent<AssignedPlant> ().set(p);
+				obj.AddComponent<AssignedPlant>().set(p);
+				obj.transform.SetParent (GridManager.get ().transform);
 				objs[i] = obj;
 				nbObjs++;
 				return obj;
@@ -54,6 +55,28 @@ public class Layer
 		return null;
 	}
 
+	public bool uproot()
+	{
+		for( int i = 0; i < 4; ++i )
+		{
+			if( objs[ i ] != null )
+			{
+				Uprootable u = objs[ i ].GetComponent<Uprootable>();
+				if( u != null )
+				{
+					if (u.uproot ())
+					{
+						GameObject.Destroy (objs [i]);
+						return true;
+					}
+					else
+						return false;
+				}
+			}
+		}
+		return false;
+	}
+
 	public GameObject getFirstObject()
 	{
 		for (int i = 0; i < 4; ++i)
@@ -78,5 +101,56 @@ public class Layer
 		}
 
 		return null;
+	}
+
+	public void updateCase( Case c )
+	{
+		for( int i = 0 ; i < 4 ; ++i )
+		{
+			if (objs [i] != null)
+			{
+				CaseActor ca = objs [i].GetComponent< CaseActor > ();
+				if (ca != null)
+					ca.updateCase( c );
+			}
+		}
+	}
+
+	public void destroyPlants()
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			if (objs [i] != null)
+			{
+				GameObject.Destroy( objs[i] );
+				objs[i] = null;
+			}
+		}
+	}
+
+	public void destroyPlants( float p )
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			if (objs [i] != null)
+			{
+				if ( Main.random() >= p )
+				{
+					GameObject.Destroy( objs[i] );
+					objs[i] = null;
+				}
+			}
+		}
+	}
+
+	public string getTxt()
+	{
+		string txt = "";
+		for( int i = 0 ; i < 4 ; ++i )
+		{
+			if ( objs[i] != null )
+				txt += " - " + objs[i].GetComponent< AssignedPlant >().get().theName + "\n";
+		}
+		return txt;
 	}
 }

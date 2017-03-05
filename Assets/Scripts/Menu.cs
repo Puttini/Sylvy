@@ -14,7 +14,6 @@ public class Menu : MonoBehaviour
 	public GameObject resumeButton;
 	bool started;
 
-	// Use this for initialization
 	void Start ()
 	{
 		instance = this;
@@ -24,12 +23,8 @@ public class Menu : MonoBehaviour
 		newGamePanel.SetActive( false );
 		instructionsPanel.SetActive( false );
 		mainPanel.SetActive( true );
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
+
+		Main.get().timeScale = 0;
 	}
 
 	public void nouvellePartie()

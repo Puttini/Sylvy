@@ -17,9 +17,25 @@ public class GridManager : MonoBehaviour
 
 	Case[,] grid;
 
+	float lastUpdate;
+
 	void Start()
 	{
 		instance = this;
+		lastUpdate = Main.time ();
+		size = 0;
+		grid = new Case[0,0];
+	}
+
+	void Update()
+	{
+		float dt = 2; // Temps entre chaque calcul (en s, sans prendre en compte le timeScale)
+		float t = Main.time ();
+		if (t - lastUpdate >= dt)
+		{
+			updateCases ();
+			lastUpdate += dt;
+		}
 	}
 
 	// Use this for initialization
@@ -35,8 +51,10 @@ public class GridManager : MonoBehaviour
 		for( int i = 0; i < size; ++i )
 		{
 			for( int j = 0; j < size; ++j )
-				grid[ i, j ] = new Case();
+				grid[ i, j ] = new Case( i, j );
 		}
+
+		lastUpdate = Main.time ();
 	}
 
 	void createObject( int i, int j, GameObject prefab )
@@ -52,16 +70,10 @@ public class GridManager : MonoBehaviour
 
 		Case c = grid[i, j];
 		GameObject obj = c.insert( p );
-		if( obj != null )
-		{
-			placeObject( obj, i, j );
-			return true;
-		}
-		else
-			return false;
+		return (obj != null);
 	}
 
-	void placeObject( GameObject obj, int i, int j )
+	public void placeObject( GameObject obj, int i, int j )
 	{
 		IsoTransform iso = obj.GetComponent<IsoTransform>();
 		iso.Position = new Vector3(i+1 + iso.Position.x, iso.Position.y, j+1 + iso.Position.z);
@@ -70,14 +82,19 @@ public class GridManager : MonoBehaviour
 
 	public bool cut( int i, int j )
 	{
-		GameObject tronc = grid[ i, j ].cut();
-		if( tronc != null )
+		GameObject souche = grid[ i, j ].cut();
+		if( souche != null )
 		{
-			tronc.transform.SetParent( this.transform );
+			souche.transform.SetParent( this.transform );
 			return true;
 		}
 
 		return false;
+	}
+
+	public bool uproot( int i, int j )
+	{
+		return grid [i, j].uproot();
 	}
 
 	public int getSize() { return size; }
@@ -87,5 +104,34 @@ public class GridManager : MonoBehaviour
 		foreach( Transform obj in transform )
 			GameObject.Destroy( obj.gameObject );
 		grid = null;
+	}
+
+	void updateCases()
+	{
+		for (int i = 0; i < size; ++i)
+		{
+			for (int j = 0; j < size; ++j)
+				grid [i, j].initUpdate();
+		}
+
+		for (int i = 0; i < size; ++i)
+		{
+			for (int j = 0; j < size; ++j)
+				grid [i, j].update();
+		}
+
+		for (int i = 0; i < size; ++i)
+		{
+			for (int j = 0; j < size; ++j)
+				grid [i, j].finishUpdate();
+		}
+	}
+
+	public Case getCase( int i, int j )
+	{
+		if (i < 0 || i >= size || j < 0 || j >= size)
+			return null;
+		else
+			return grid[i, j];
 	}
 }
