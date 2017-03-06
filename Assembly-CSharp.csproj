@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AssignedBasic.cs" />
      <Compile Include="Assets\Scripts\AssignedCase.cs" />
      <Compile Include="Assets\Scripts\AssignedPlant.cs" />
      <Compile Include="Assets\Scripts\ButtonCut.cs" />

@@ -7,37 +7,38 @@ using Assets.UltimateIsometricToolkit.Scripts.Utils;
 public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 {
 	float age;
-	float uprootCost;
+	int uprootCost;
 	float size;
 	bool isDead;
 
 	public float getAge() { return age; }
-	public void setAge( float a ) { age = a; } 
-	public void setScale( float scale ) // Utilisée une seule fois
+	public void setProperties( float age, float scale, bool dead, float cost, float humidite, float luminosite, float fertilite )
 	{
 		IsoTransform iso = GetComponent<IsoTransform>();
 		iso.Size *= scale;
 		iso.Position = new Vector3( iso.Position.x, scale * iso.Position.y, iso.Position.z );
 		transform.localScale *= scale;
 		size = scale;
-	}
 
-	public void setDead( bool dead ) { isDead = dead; }
+		this.age = age;
+		this.isDead = dead;
+		this.uprootCost = (int)(size * uprootCost);
+	}
 
 	public bool uproot()
 	{
-		int cost = (int)(size * uprootCost);
-		if (Main.get ().money >= cost)
+		if (Main.get ().money >= uprootCost)
 		{
-			Main.get ().money -= cost;
+			Main.get ().money -= uprootCost;
 			return true;
 		}
+		GetComponent<AssignedCase>().get().addFertilite( -15 );
 		return false;
 	}
 
-	public void setUprootCost( float cost )
+	public int getUprootCost()
 	{
-		uprootCost = cost;
+		return uprootCost;
 	}
 
 	public void updateCase( Case c )

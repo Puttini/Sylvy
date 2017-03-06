@@ -21,7 +21,10 @@ public class PlantManager : MonoBehaviour
 
 	// Plant prefabs
 	public Plant sapin;
+	public Plant saule;
+	public Plant hetre;
 	public Plant bouleau;
+	public Plant chene;
 	public Plant fougere;
 	public Plant herbe;
 	public Plant marguerite;
@@ -51,7 +54,10 @@ public class PlantManager : MonoBehaviour
 
 		// Tests
 		addToPanel( sapin );
+		addToPanel( saule );
+		addToPanel( hetre );
 		addToPanel( bouleau );
+		addToPanel( chene );
 		addToPanel( fougere );
 		addToPanel( herbe );
 		addToPanel( marguerite );

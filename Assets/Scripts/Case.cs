@@ -54,10 +54,7 @@ public class Case
 		luminosite = 0;
 		humidite = 0;
 		fertilite = 0;
-	}
 
-	public void initUpdate()
-	{
 		tmpLuminosite = 0;
 		tmpHumidite = 0;
 		tmpFertilite = 0;
@@ -96,6 +93,10 @@ public class Case
 			if ( p.toss(l, h, f) )
 				insert (p);
 		}
+
+		tmpLuminosite = 0;
+		tmpHumidite = 0;
+		tmpFertilite = 0;
 	}
 
 	public GameObject insert( Plant p )
@@ -105,6 +106,7 @@ public class Case
 		{
 			GridManager.get().placeObject(obj, coordX, coordY);
 			obj.AddComponent<AssignedCase>().set( this );
+			obj.name = p.theName;
 		}
 		return obj;
 	}
@@ -146,14 +148,22 @@ public class Case
 		tmpFertilite += f;
 	}
 
+	public void addProperties( float h, float l, float f )
+	{
+		addHumidite(h);
+		addLuminosite(l);
+		addFertilite(f);
+	}
+
 	void spread( int x, int y )
 	{
 		Case c = GridManager.get ().getCase (x, y);
 		if ( c != null )
 		{
-			c.addFertilite( fertilite*0.06f );
-			c.addHumidite( humidite*0.1f );
-			c.addLuminosite( luminosite*0.03f );
+			c.addProperties(
+				0.10f  * humidite,
+				0.03f * luminosite,
+				0.06f * fertilite );
 		}
 	}
 
@@ -194,12 +204,43 @@ public class Case
 
 	public string getDescription()
 	{
-		string txt = "Humidité : " + getHumidite() + "\n";
+		string txt = "";
+
+		GameObject tree = layers[0].getFirstObject();
+		if ( tree != null )
+		{
+			Debug.Log( "BWABWA" );
+			txt += "<b>" + tree.name + "</b>\n";
+			Debug.Log( tree.name );
+
+			Cuttable cut = tree.GetComponent<Cuttable>();
+			if ( cut != null )
+				txt += "Coupe : " + cut.getCutPrice() + "$\n";
+
+			Uprootable up = tree.GetComponent<Uprootable>();
+			if ( up != null )
+				txt += "Déracinement : " + up.getUprootCost() + "$\n";
+
+			txt += "\n";
+		}
+
+		txt += "Humidité : " + getHumidite() + "\n";
 		txt += "Luminosité : " + getLuminosite() + "\n";
-		txt += "Fertilité : " + getFertilite() + "\n\n\n";
-		txt += "Contient :\n\n";
-		for( int i = 0 ; i < (int)Layers.NbLayers ; ++i )
-			txt += layers[i].getTxt() + "\n";
+		txt += "Fertilité : " + getFertilite() + "\n\n";
+
+		txt += "Contient :\n";
+		for( int i = 1 ; i < (int)Layers.NbLayers ; ++i )
+			txt += layers[i].getTxt();
 		return txt;
+	}
+
+	public bool removeObject( GameObject o )
+	{
+		for( int i = 0 ; i < (int)Layers.NbLayers ; ++i )
+		{
+			if ( layers[i].removeObject(o) )
+				return true;
+		}
+		return false;
 	}
 };

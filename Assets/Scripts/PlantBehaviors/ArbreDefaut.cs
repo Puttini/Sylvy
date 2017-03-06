@@ -13,7 +13,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public GameObject souche;
 	public Sprite dead;
 	public float cutIncome;
-	public float uprootCost;
+	public float baseUprootCost;
 
 	public float luminosite;
 	public float humidite;
@@ -24,7 +24,9 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public float deadFertilite;
 
 	public float lmin;
+	public float lmax;
 	public float hmin;
+	public float hmax;
 	public float pDie;
 
 	float lastUpdate;
@@ -87,33 +89,46 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	{
 		GameObject newTronc = GameObject.Instantiate( souche );
 		SoucheDefaut t = newTronc.AddComponent<SoucheDefaut>();
+		newTronc.AddComponent<AssignedCase>().set( GetComponent<AssignedCase>().get() );
 		IsoTransform iso1 = GetComponent<IsoTransform>();
 		IsoTransform iso2 = newTronc.GetComponent<IsoTransform>();
 		iso2.Position = new Vector3( iso1.Position.x, iso2.Position.y, iso1.Position.z );
-		t.setAge( age );
 		float scale = 0.4f + 0.6f*Mathf.Min( 1.0f, age / growingTime );
-		t.setScale( scale );
-		t.setUprootCost (uprootCost);
-		t.setDead( isDead );
+
+		float h = 0;
+		float l = 0;
+		float f = 0;
+		t.setProperties( age, scale, dead, baseUprootCost, h, l, f );
 
 		if( inc != null )
 			GameObject.Destroy( inc );
 
-		float scale2 = Mathf.Min( 1.0f, age / growingTime );
-		Main.get ().money += (int)(scale2 * cutIncome);
+		Main.get ().money += getCutPrice();
+
+		newTronc.name = "Souche de " + name;
 
 		return newTronc;
 	}
 
+	public int getCutPrice()
+	{
+		float scale2 = Mathf.Min( 1.0f, age / growingTime );
+		float c = (scale2 * cutIncome);
+		if ( isDead )
+			c /= 2;
+		return (int)c;
+	}
+
 	public void updateCase( Case c )
 	{
-		if ( !isDead && ( c.getLuminosite() < lmin || c.getHumidite() < hmin ) )
+		if ( !isDead && ( c.getLuminosite() < lmin || c.getLuminosite() > lmax || c.getHumidite() < hmin || c.getHumidite() > hmax ) )
 		{
 			// Mort de l'arbre
 			if ( pDie > Main.random() )
 			{
 				isDead = true;
 				GetComponent<SpriteRenderer>().sprite = dead;
+				name += " (Mort)";
 
 				if (inc != null)
 					GameObject.Destroy( inc );
@@ -121,17 +136,39 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		}
 
 		float scale = Mathf.Min( 1.0f, age / growingTime );
+		float h = 0.7f + 0.3f*scale;
+		float l = 0.2f + 0.8f*scale;
+		float f = 0.5f + 0.5f*scale;
 		if ( !isDead )
 		{
-			c.addHumidite( (0.7f+0.3f*scale)*humidite );
-			c.addLuminosite( (0.2f+0.8f*scale)*luminosite );
-			c.addFertilite( (0.5f + 0.5f*scale)*fertilite );
+			h *= humidite;
+			l *= luminosite;
+			f *= fertilite;
 		}
 		else
 		{
-			c.addHumidite( (0.7f+0.3f*scale)*deadHumidite );
-			c.addLuminosite( (0.2f+0.8f*scale)*deadLuminosite );
-			c.addFertilite( (0.5f + 0.5f*scale)*deadFertilite );
+			h *= deadHumidite;
+			l *= deadLuminosite;
+			f *= deadFertilite;
 		}
+
+		float h2 = 0.6f * h;
+		float l2 = 0.8f * l;
+		float f2 = 0.8f * f;
+
+
+		GridManager gm = GridManager.get();
+		int x = c.getX();
+		int y = c.getY();
+
+		c.addProperties( h, l, f );
+		gm.addProperties( x-1, y-1, h2, l2, f2 );
+		gm.addProperties( x  , y-1, h2, l2, f2 );
+		gm.addProperties( x+1, y-1, h2, l2, f2 );
+		gm.addProperties( x+1, y  , h2, l2, f2 );
+		gm.addProperties( x+1, y+1, h2, l2, f2 );
+		gm.addProperties( x  , y+1, h2, l2, f2 );
+		gm.addProperties( x-1, y+1, h2, l2, f2 );
+		gm.addProperties( x-1, y  , h2, l2, f2 );
 	}
 }

@@ -111,12 +111,6 @@ public class GridManager : MonoBehaviour
 		for (int i = 0; i < size; ++i)
 		{
 			for (int j = 0; j < size; ++j)
-				grid [i, j].initUpdate();
-		}
-
-		for (int i = 0; i < size; ++i)
-		{
-			for (int j = 0; j < size; ++j)
 				grid [i, j].update();
 		}
 
@@ -133,5 +127,17 @@ public class GridManager : MonoBehaviour
 			return null;
 		else
 			return grid[i, j];
+	}
+
+	public bool addProperties( int x, int y, float h, float l, float f )
+	{
+		Case c = getCase( x, y );
+		if ( c != null )
+		{
+			c.addProperties( h, l, f );
+			return true;
+		}
+		else
+			return false;
 	}
 }

@@ -149,8 +149,22 @@ public class Layer
 		for( int i = 0 ; i < 4 ; ++i )
 		{
 			if ( objs[i] != null )
-				txt += " - " + objs[i].GetComponent< AssignedPlant >().get().theName + "\n";
+				txt += " - " + objs[i].name + "\n";
 		}
 		return txt;
+	}
+
+	public bool removeObject( GameObject o )
+	{
+		for( int i = 0 ; i < 4 ; ++i )
+		{
+			if ( objs[i] == o )
+			{
+				objs[i] = null;
+				GameObject.Destroy( o );
+				return true;
+			}
+		}
+		return false;
 	}
 }

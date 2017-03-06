@@ -5,4 +5,5 @@ using UnityEngine;
 public interface Uprootable
 {
 	bool uproot();
+	int getUprootCost();
 }
