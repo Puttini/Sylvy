@@ -13,6 +13,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public GameObject souche;
 	public Sprite dead;
 	public float cutIncome;
+	public float cutDeadIncome;
 	public float baseUprootCost;
 
 	public float luminosite;
@@ -27,6 +28,8 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public float lmax;
 	public float hmin;
 	public float hmax;
+	public float fmin;
+	public float fmax;
 	public float pDie;
 
 	float lastUpdate;
@@ -113,15 +116,19 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public int getCutPrice()
 	{
 		float scale2 = Mathf.Min( 1.0f, age / growingTime );
-		float c = (scale2 * cutIncome);
+		float c;
 		if ( isDead )
-			c /= 2;
+			c = (scale2 * cutDeadIncome);
+		else
+			c = (scale2 * cutIncome );
 		return (int)c;
 	}
 
 	public void updateCase( Case c )
 	{
-		if ( !isDead && ( c.getLuminosite() < lmin || c.getLuminosite() > lmax || c.getHumidite() < hmin || c.getHumidite() > hmax ) )
+		if ( !isDead && ( c.getLuminosite() < lmin || c.getLuminosite() > lmax
+			|| c.getHumidite() < hmin || c.getHumidite() > hmax
+			|| c.getFertilite() < fmin || c.getFertilite() > fmax ) )
 		{
 			// Mort de l'arbre
 			if ( pDie > Main.random() )

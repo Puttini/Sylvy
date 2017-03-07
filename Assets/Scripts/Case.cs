@@ -78,9 +78,9 @@ public class Case
 	public void finishUpdate()
 	{
 		int n = 4;
-		luminosite = ( luminosite*(n-1) + tmpLuminosite ) / n;
-		humidite = ( humidite*(n-1) + tmpHumidite) / n;
-		fertilite = ( fertilite*(n-1) + tmpFertilite ) / n;
+		luminosite = ( luminosite*2 + tmpLuminosite ) / 3;
+		humidite = ( humidite*5 + tmpHumidite) / 6;
+		fertilite = ( fertilite*9 + tmpFertilite ) / 10;
 
 		// Apparition de fleurs, etc...
 		int nbPlants = PlantManager.get().getNbPlants();
@@ -90,8 +90,11 @@ public class Case
 		for( int i = 0 ; i < nbPlants ; ++i )
 		{
 			Plant p = PlantManager.get().getPlant(i);
-			if ( p.toss(l, h, f) )
-				insert (p);
+			if( p.toss( l, h, f ) )
+			{
+				insert( p );
+				Main.msgApparitionFleur();
+			}
 		}
 
 		tmpLuminosite = 0;

@@ -34,10 +34,13 @@ public class Main : MonoBehaviour
 	bool normalSpeed;
 
 	// Pour les messages ingame
+	public bool enableMsg;
 	bool firstTimeButtonPlant;
 	bool firstTimeButtonCut;
 	bool firstTimeButtonUproot;
 	bool firstTimeInsertTree;
+	bool firstTimeFleursApparues;
+	int nbFleursApparues;
 
 	void Start()
 	{
@@ -45,9 +48,9 @@ public class Main : MonoBehaviour
 		rng = new System.Random();
 		normalSpeed = true;
 
-		bool tuto = false;
-		firstTimeButtonPlant = tuto;
-		firstTimeButtonCut = tuto;
+		firstTimeButtonPlant = enableMsg;
+		firstTimeButtonCut = enableMsg;
+		nbFleursApparues = 0;
 	}
 
 	void Update()
@@ -206,6 +209,11 @@ public class Main : MonoBehaviour
 	}
 
 	public static void msgInsertTree()
+	{
+
+	}
+
+	public static void msgApparitionFleur()
 	{
 
 	}

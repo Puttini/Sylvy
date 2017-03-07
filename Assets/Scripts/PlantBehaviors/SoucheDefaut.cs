@@ -30,9 +30,9 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 		if (Main.get ().money >= uprootCost)
 		{
 			Main.get ().money -= uprootCost;
+			GetComponent<AssignedCase>().get().addFertilite( -200 );
 			return true;
 		}
-		GetComponent<AssignedCase>().get().addFertilite( -15 );
 		return false;
 	}
 

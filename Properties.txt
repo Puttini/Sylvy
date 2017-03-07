@@ -1,0 +1,44 @@
+Inserer une duree de vie
+(très supérieure à la durée de pousse)
+Inserer un indice de diversité
+
+Chene :
+	Badass
+	Coûte assez cher à pousser
+	Se revend cher (sauf si mort)
+	Très long à pousser et à mourir (600ans)
+	Pourri un peu l'environnement adjacent
+
+Hetre :
+	Arbre pourri qui meurt vite, fragile
+	Mais fait bien pousser les fleurs et plein de bons champignons (
+	Si trop humide, meurt
+	Moins sensible à la fertilité
+	(Peut pousser en rose, si j'ai le temps de le faire)
+	(Peut faire pousser d'autres hêtres proches, à partir de la moitié de la durée de vie)
+	Duree de vie courte (4 fois moins que le chêne)
+	Pas trop cher
+	Revenu très peu
+	S'associe bien avec le chêne et le sapin
+
+Saule :
+	petit... !
+	A besoin d'humidité et de beaucoup de lumière
+	Il a le swag (y)
+	Augmente la diversité
+	Coûte assez cher
+	Rapporte pas mal (mais 3-4 fois moins que le chêne)
+	Durée de vie 50 ans (10 fois moins que le chêne !)
+
+Bouleau :
+	ARBRE DE BASE
+	Durée de vie courte
+	Mais très résistant
+	Permet bien de faire pousser les fleurs et les trucs de base
+	Prix corect
+
+Sapin :
+	Arbre de base aussi
+	Pousse vite
+	Pas cool pour les fleurs
+	Pas cool pour la fertilité
