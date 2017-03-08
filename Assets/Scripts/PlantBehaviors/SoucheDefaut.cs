@@ -11,6 +11,8 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 	float size;
 	bool isDead;
 
+	float h, l, f;
+
 	public float getAge() { return age; }
 	public void setProperties( float age, float scale, bool dead, float cost, float humidite, float luminosite, float fertilite )
 	{
@@ -23,6 +25,10 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 		this.age = age;
 		this.isDead = dead;
 		this.uprootCost = (int)(size * uprootCost);
+
+		h = humidite;
+		l = luminosite;
+		f = fertilite;
 	}
 
 	public bool uproot()
@@ -43,6 +49,23 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 
 	public void updateCase( Case c )
 	{
+		float h2 = 0.6f * h;
+		float l2 = 0.8f * l;
+		float f2 = 0.8f * f;
 
+
+		GridManager gm = GridManager.get();
+		int x = c.getX();
+		int y = c.getY();
+
+		c.addProperties( h, l, f );
+		gm.addProperties( x-1, y-1, h2, l2, f2 );
+		gm.addProperties( x  , y-1, h2, l2, f2 );
+		gm.addProperties( x+1, y-1, h2, l2, f2 );
+		gm.addProperties( x+1, y  , h2, l2, f2 );
+		gm.addProperties( x+1, y+1, h2, l2, f2 );
+		gm.addProperties( x  , y+1, h2, l2, f2 );
+		gm.addProperties( x-1, y+1, h2, l2, f2 );
+		gm.addProperties( x-1, y  , h2, l2, f2 );
 	}
 }

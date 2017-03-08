@@ -10,26 +10,37 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public float period;
 
 	public float growingTime;
+	public float lifeTime;
+
 	public GameObject souche;
 	public Sprite dead;
 	public float cutIncome;
 	public float cutDeadIncome;
 	public float baseUprootCost;
 
-	public float luminosite;
 	public float humidite;
+	public float luminosite;
 	public float fertilite;
 
-	public float deadLuminosite;
 	public float deadHumidite;
+	public float deadLuminosite;
 	public float deadFertilite;
 
-	public float lmin;
-	public float lmax;
+	public float sHumidite;
+	public float sLuminosite;
+	public float sFertilite;
+
+	public float sDeadHumidite;
+	public float sDeadLuminosite;
+	public float sDeadFertilite;
+
 	public float hmin;
 	public float hmax;
+	public float lmin;
+	public float lmax;
 	public float fmin;
 	public float fmax;
+	public float dmin;
 	public float pDie;
 
 	float lastUpdate;
@@ -40,23 +51,33 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	GameObject inc;
 	bool isDead;
 
+	ArbreDefaut()
+	{
+		age = 0;
+		isDead = false;
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
 		lastUpdate = Main.time();
-		age = 0;
 		inc = null;
+
 		IsoTransform iso = GetComponent<IsoTransform>();
 		finalY = iso.Position.y;
 		finalSize = new Vector3( iso.Size.x, iso.Size.y, iso.Size.z );
 		finalScale = transform.localScale;
 
+		// Randomizing the final size of the tree
+		float adultSize = 0.7f + 0.3f * Main.random();
+		finalY *= adultSize;
+		finalSize *= adultSize;
+		finalScale *= adultSize;
+
 		// Changing alpha
 		Color c = GetComponent<SpriteRenderer>().color;
 		c.a = 0.7f;
 		GetComponent<SpriteRenderer>().color = c;
-
-		isDead = false;
 	}
 	
 	// Update is called once per frame
@@ -98,9 +119,9 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		iso2.Position = new Vector3( iso1.Position.x, iso2.Position.y, iso1.Position.z );
 		float scale = 0.4f + 0.6f*Mathf.Min( 1.0f, age / growingTime );
 
-		float h = 0;
-		float l = 0;
-		float f = 0;
+		float h = isDead ? sDeadHumidite : sHumidite;
+		float l = isDead ? sDeadLuminosite : sLuminosite;
+		float f = isDead ? sDeadFertilite : sFertilite;
 		t.setProperties( age, scale, dead, baseUprootCost, h, l, f );
 
 		if( inc != null )
@@ -124,11 +145,18 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		return (int)c;
 	}
 
+	public void setAge( float a )
+	{
+		age = a;
+	}
+
 	public void updateCase( Case c )
 	{
 		if ( !isDead && ( c.getLuminosite() < lmin || c.getLuminosite() > lmax
 			|| c.getHumidite() < hmin || c.getHumidite() > hmax
-			|| c.getFertilite() < fmin || c.getFertilite() > fmax ) )
+			|| c.getFertilite() < fmin || c.getFertilite() > fmax
+			|| GridManager.get().getDiversite() < dmin
+			|| age > lifeTime ) )
 		{
 			// Mort de l'arbre
 			if ( pDie > Main.random() )

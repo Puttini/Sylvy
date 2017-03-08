@@ -17,9 +17,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 	public static T Instance {
 		get {
 			if (_applicationIsQuitting) {
-				Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
+				/*Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
 					"' already destroyed on application quit." +
-					" Won't create again - returning null.");
+					" Won't create again - returning null.");*/
 				_instance = null;
 				return null;
 			}
@@ -47,8 +47,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 							" is needed in the scene, so '" + singleton +
 							"' was created with DontDestroyOnLoad.");
 					} else {
-						Debug.Log("[Singleton] Using instance already created: " +
-							_instance.gameObject.name);
+						/*Debug.Log("[Singleton] Using instance already created: " +
+							_instance.gameObject.name);*/
 					}
 				}
 				

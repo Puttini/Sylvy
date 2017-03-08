@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ButtonPlant.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlantBehaviors\BasicPlant.cs">
     <Files>
-      <File FileName="Assets/Scripts/CameraController.cs" Line="40" Column="3" />
-      <File FileName="Assets/Scripts/Main.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/MoneyManager.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/GridManager.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/Plant.cs" Line="7" Column="27" />
-      <File FileName="Assets/Scripts/ButtonPlant.cs" Line="4" Column="22" />
-      <File FileName="Assets/Scripts/PlantManager.cs" Line="92" Column="49" />
+      <File FileName="Assets\Scripts\Backend\GridManager.cs" Line="169" Column="2" />
+      <File FileName="Assets\Scripts\Backend\Case.cs" Line="241" Column="27" />
+      <File FileName="Assets\Scripts\Backend\Layer.cs" Line="160" Column="4" />
+      <File FileName="Assets\Scripts\PlantBehaviors\ArbreDefaut.cs" Line="186" Column="24" />
+      <File FileName="Assets\Scripts\PlantBehaviors\SoucheDefaut.cs" Line="13" Column="2" />
+      <File FileName="Assets\Scripts\Backend\Plant.cs" Line="17" Column="26" />
+      <File FileName="Assets\Scripts\Backend\PlantManager.cs" Line="123" Column="4" />
+      <File FileName="Assets\Scripts\Backend\Main.cs" Line="83" Column="1" />
+      <File FileName="Assets\Scripts\PlantBehaviors\BasicPlant.cs" Line="37" Column="22" />
+      <File FileName="Assets\Scripts\Tools\AssignedBasic.cs" Line="13" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

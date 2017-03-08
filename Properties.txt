@@ -1,6 +1,13 @@
-Inserer une duree de vie
-(très supérieure à la durée de pousse)
-Inserer un indice de diversité
+﻿*Inserer une duree de vie (très supérieure à la durée de pousse)
+*Inserer un indice de diversité
+*Génération aléatoire du terrain
+
+Bouleau :
+	*ARBRE DE BASE
+	Durée de vie courte
+	Mais très résistant
+	Permet bien de faire pousser les fleurs et les trucs de base
+	Prix correct
 
 Chene :
 	Badass
@@ -21,6 +28,12 @@ Hetre :
 	Revenu très peu
 	S'associe bien avec le chêne et le sapin
 
+Sapin :
+	*Arbre de base aussi
+	Pousse vite
+	Pas cool pour les fleurs
+	Pas cool pour la fertilité
+
 Saule :
 	petit... !
 	A besoin d'humidité et de beaucoup de lumière
@@ -29,16 +42,3 @@ Saule :
 	Coûte assez cher
 	Rapporte pas mal (mais 3-4 fois moins que le chêne)
 	Durée de vie 50 ans (10 fois moins que le chêne !)
-
-Bouleau :
-	ARBRE DE BASE
-	Durée de vie courte
-	Mais très résistant
-	Permet bien de faire pousser les fleurs et les trucs de base
-	Prix corect
-
-Sapin :
-	Arbre de base aussi
-	Pousse vite
-	Pas cool pour les fleurs
-	Pas cool pour la fertilité

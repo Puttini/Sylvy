@@ -11,13 +11,20 @@ public class BasicPlant : MonoBehaviour, CaseActor
 	public float humidite;
 	public float fertilite;
 
-	public float lmin;
-	public float lmax;
 	public float hmin;
 	public float hmax;
+	public float lmin;
+	public float lmax;
 	public float pDie;
 
+	public float lifeTime;
+	public float pNaturalDie;
+
+	float firstTime;
+
 	GameObject inc;
+	GameObject instance;
+	public void  setInstance( GameObject o ) { instance = o; }
 
 	public void Start()
 	{
@@ -25,19 +32,39 @@ public class BasicPlant : MonoBehaviour, CaseActor
 			inc = Main.addIncome( income, period );
 		else
 			inc = null;
+
+		firstTime = Main.time();
+		Debug.Log("start");
 	}
 
 	public void updateCase( Case c )
 	{
-		if ( c.getLuminosite() < lmin || c.getLuminosite() > lmax || c.getHumidite() < hmin || c.getHumidite() > hmax )
+		Debug.Log( Main.time() - firstTime );
+		bool again = true;
+		if ( Main.time() - firstTime > lifeTime )
 		{
-			// Mort de l'arbre
-			if ( pDie > Main.random() )
+			// Mort de la plante
+			Debug.Log("DYING");
+			if ( pNaturalDie >= Main.random() )
+			{
+				Debug.Log("Die");
+				if (inc != null)
+					GameObject.Destroy( inc );
+
+				c.removeObject(instance);
+				again = false;
+			}
+		}
+
+		if ( again && (c.getLuminosite() < lmin || c.getLuminosite() > lmax || c.getHumidite() < hmin || c.getHumidite() > hmax) )
+		{
+			// Mort de la plante
+			if ( pDie >= Main.random() )
 			{
 				if (inc != null)
 					GameObject.Destroy( inc );
-				
-				GetComponent<AssignedCase>().get().removeObject(gameObject);
+
+				c.removeObject(instance);
 			}
 		}
 		else
