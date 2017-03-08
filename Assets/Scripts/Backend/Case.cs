@@ -200,9 +200,9 @@ public class Case
 			c.destroySomeLocalPlants( p );
 	}
 
-	public float getLuminosite() { return Mathf.Pow( 1.5f, luminosite ); }
-	public float getHumidite() { return Mathf.Pow( 1.5f, humidite ); }
-	public float getFertilite() { return Mathf.Pow( 1.5f, fertilite ); }
+	public float getLuminosite() { return Mathf.Atan( luminosite )/Mathf.PI*2 + 1; }
+	public float getHumidite() { return Mathf.Atan( humidite )/Mathf.PI*2 + 1; }
+	public float getFertilite() { return Mathf.Atan( fertilite )/Mathf.PI*2 + 1; }
 
 	public string getDescription()
 	{

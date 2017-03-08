@@ -18,15 +18,13 @@ public class BasicPlant : MonoBehaviour, CaseActor
 	public float pDie;
 
 	public float lifeTime;
-	public float pNaturalDie;
+	public float pNaturalDeath;
 
 	float firstTime;
 
 	GameObject inc;
-	GameObject instance;
-	public void  setInstance( GameObject o ) { instance = o; }
 
-	public void Start()
+	public void init()
 	{
 		if ( income != 0 && period > 0 )
 			inc = Main.addIncome( income, period );
@@ -34,24 +32,20 @@ public class BasicPlant : MonoBehaviour, CaseActor
 			inc = null;
 
 		firstTime = Main.time();
-		Debug.Log("start");
 	}
 
 	public void updateCase( Case c )
 	{
-		Debug.Log( Main.time() - firstTime );
 		bool again = true;
 		if ( Main.time() - firstTime > lifeTime )
 		{
-			// Mort de la plante
-			Debug.Log("DYING");
-			if ( pNaturalDie >= Main.random() )
+			// Mort naturelle de la plante
+			if ( pNaturalDeath >= Main.random() )
 			{
-				Debug.Log("Die");
 				if (inc != null)
 					GameObject.Destroy( inc );
 
-				c.removeObject(instance);
+				c.removeObject(gameObject);
 				again = false;
 			}
 		}
@@ -64,7 +58,7 @@ public class BasicPlant : MonoBehaviour, CaseActor
 				if (inc != null)
 					GameObject.Destroy( inc );
 
-				c.removeObject(instance);
+				c.removeObject(gameObject);
 			}
 		}
 		else
@@ -92,5 +86,25 @@ public class BasicPlant : MonoBehaviour, CaseActor
 			gm.addProperties( x-1, y+1, h2, l2, f2 );
 			gm.addProperties( x-1, y  , h2, l2, f2 );
 		}
+	}
+
+	public void fromPrefab( BasicPlant b )
+	{
+		income = b.income;
+		period = b.period;
+
+		luminosite = b.luminosite;
+		humidite = b.humidite;
+		fertilite = b.fertilite;
+
+		hmin = b.hmin;
+		hmax = b.hmax;
+		lmin = b.lmin;
+		lmax = b.lmax;
+
+		pDie = b.pDie;
+
+		lifeTime = b.lifeTime;
+		pNaturalDeath = b.pNaturalDeath;
 	}
 }

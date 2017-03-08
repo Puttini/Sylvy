@@ -174,11 +174,15 @@ public class Layer
 		{
 			if ( objs[i] != null )
 			{
-				string p = objs[i].GetComponent<AssignedPlant>().get().theName;
-				if ( dico.ContainsKey(p) )
-					dico[p]++;
-				else
-					dico[p] = 1;
+				AssignedPlant p = objs[i].GetComponent<AssignedPlant>();
+				if ( p != null )
+				{
+					string n = p.get().theName;
+					if ( dico.ContainsKey(n) )
+						dico[n]++;
+					else
+						dico[n] = 1;
+				}
 			}
 		}
 	}
