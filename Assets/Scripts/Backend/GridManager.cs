@@ -36,7 +36,7 @@ public class GridManager : MonoBehaviour
 		float t = Main.time ();
 		if (t - lastUpdate >= dt)
 		{
-			updateCases ();
+			updateCases();
 			lastUpdate += dt;
 		}
 	}
@@ -179,8 +179,15 @@ public class GridManager : MonoBehaviour
 		diversite = 0;
 		foreach( KeyValuePair<string,int> pair in dico )
 		{
-			float d = 0.5f + Mathf.Min( (pair.Value / 15.0f), 1.0f );
+			float d = Mathf.Min( (pair.Value / 15.0f), 1.0f );
 			diversite += d;
 		}
+
+		if ( diversite > 5 )
+			Main.msgDiversite5();
+		if ( diversite > 7 )
+			Main.msgDiversite7();
+		if ( diversite > 10 )
+			Main.msgDiversite10();
 	}
 }

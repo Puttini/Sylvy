@@ -42,6 +42,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public float fmax;
 	public float dmin;
 	public float pDie;
+	public float pNaturalDeath;
 
 	float lastUpdate;
 	float finalY;
@@ -152,28 +153,68 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 
 	public void updateCase( Case c )
 	{
-		if ( !isDead && ( c.getLuminosite() < lmin || c.getLuminosite() > lmax
-			|| c.getHumidite() < hmin || c.getHumidite() > hmax
-			|| c.getFertilite() < fmin || c.getFertilite() > fmax
-			|| GridManager.get().getDiversite() < dmin
-			|| age > lifeTime ) )
+		float h = c.getHumidite();
+		float l = c.getLuminosite();
+		float f = c.getFertilite();
+		if ( !isDead )
 		{
-			// Mort de l'arbre
-			if ( pDie > Main.random() )
+			if ( h < hmin )
 			{
-				isDead = true;
-				GetComponent<SpriteRenderer>().sprite = dead;
-				name += " (Mort)";
+				float p = (hmin-h)/hmin * pDie;
+				if ( p > Main.random() )
+					die();
+			}
+			else if ( h > hmax )
+			{
+				float p = (h-hmax)/(1-hmax) * pDie;
+				if ( p > Main.random() )
+					die();
+			}
 
-				if (inc != null)
-					GameObject.Destroy( inc );
+			if ( l < lmin )
+			{
+				float p = (lmin-l)/lmin * pDie;
+				if ( p > Main.random() )
+					die();
+			}
+			else if ( l > lmax )
+			{
+				float p = (l-lmax)/(1-lmax) * pDie;
+				if ( p > Main.random() )
+					die();
+			}
+
+			if ( f < fmin )
+			{
+				float p = (fmin-h)/fmin * pDie;
+				if ( p > Main.random() )
+					die();
+			}
+			else if ( f > fmax )
+			{
+				float p = (f-fmax)/(1-fmax) * pDie;
+				if ( p > Main.random() )
+					die();
+			}
+
+			if ( GridManager.get().getDiversite() < dmin )
+			{
+				if ( pDie > Main.random() )
+					die();
+			}
+
+			if ( age > lifeTime )
+			{
+				if ( pNaturalDeath > Main.random() )
+					die("Mort de vieillesse");
 			}
 		}
 
+
 		float scale = Mathf.Min( 1.0f, age / growingTime );
-		float h = 0.7f + 0.3f*scale;
-		float l = 0.2f + 0.8f*scale;
-		float f = 0.5f + 0.5f*scale;
+		h = 0.7f + 0.3f*scale;
+		l = 0.2f + 0.8f*scale;
+		f = 0.5f + 0.5f*scale;
 		if ( !isDead )
 		{
 			h *= humidite;
@@ -188,8 +229,8 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		}
 
 		float h2 = 0.6f * h;
-		float l2 = 0.8f * l;
-		float f2 = 0.8f * f;
+		float l2 = 0.65f * l;
+		float f2 = 0.6f * f;
 
 
 		GridManager gm = GridManager.get();
@@ -205,5 +246,17 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		gm.addProperties( x  , y+1, h2, l2, f2 );
 		gm.addProperties( x-1, y+1, h2, l2, f2 );
 		gm.addProperties( x-1, y  , h2, l2, f2 );
+	}
+
+	public void die( string reason = "Mort")
+	{
+		isDead = true;
+		GetComponent<SpriteRenderer>().sprite = dead;
+		name += " (" + reason + ")";
+
+		if (inc != null)
+			GameObject.Destroy( inc );
+
+		Main.msgArbreMort();
 	}
 }

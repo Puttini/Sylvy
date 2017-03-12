@@ -15,6 +15,9 @@ public class BasicPlant : MonoBehaviour, CaseActor
 	public float hmax;
 	public float lmin;
 	public float lmax;
+	public float fmin;
+	public float fmax;
+	public float dmin;
 	public float pDie;
 
 	public float lifeTime;
@@ -36,36 +39,76 @@ public class BasicPlant : MonoBehaviour, CaseActor
 
 	public void updateCase( Case c )
 	{
-		bool again = true;
-		if ( Main.time() - firstTime > lifeTime )
-		{
-			// Mort naturelle de la plante
-			if ( pNaturalDeath >= Main.random() )
-			{
-				if (inc != null)
-					GameObject.Destroy( inc );
+		bool dead = false;
 
-				c.removeObject(gameObject);
-				again = false;
-			}
+		float h = c.getHumidite();
+		float l = c.getLuminosite();
+		float f = c.getFertilite();
+
+		if ( !dead && h < hmin )
+		{
+			float p = (hmin-h)/hmin * pDie;
+			if ( p > Main.random() )
+				dead = true;
+		}
+		else if ( !dead && h > hmax )
+		{
+			float p = (h-hmax)/(1-hmax) * pDie;
+			if ( p > Main.random() )
+				dead = true;
 		}
 
-		if ( again && (c.getLuminosite() < lmin || c.getLuminosite() > lmax || c.getHumidite() < hmin || c.getHumidite() > hmax) )
+		if ( !dead && l < lmin )
 		{
-			// Mort de la plante
-			if ( pDie >= Main.random() )
-			{
-				if (inc != null)
-					GameObject.Destroy( inc );
+			float p = (lmin-l)/lmin * pDie;
+			if ( p > Main.random() )
+				dead = true;
+		}
+		else if ( !dead && l > lmax )
+		{
+			float p = (l-lmax)/(1-lmax) * pDie;
+			if ( p > Main.random() )
+				dead = true;
+		}
 
-				c.removeObject(gameObject);
-			}
+		if ( !dead && f < fmin )
+		{
+			float p = (fmin-h)/fmin * pDie;
+			if ( p > Main.random() )
+				dead = true;
+		}
+		else if ( !dead && f > fmax )
+		{
+			float p = (f-fmax)/(1-fmax) * pDie;
+			if ( p > Main.random() )
+				dead = true;
+		}
+
+		if ( !dead && GridManager.get().getDiversite() < dmin )
+		{
+			if ( pDie > Main.random() )
+				dead = true;
+		}
+
+		if ( !dead && Main.time() - firstTime > lifeTime )
+		{
+			if ( pNaturalDeath > Main.random() )
+				dead = true;
+		}
+
+
+		if ( dead )
+		{
+			if (inc != null)
+				GameObject.Destroy( inc );
+
+			c.removeObject(gameObject);
 		}
 		else
 		{
-			float h = humidite;
-			float l = luminosite;
-			float f = fertilite;
+			h = humidite;
+			l = luminosite;
+			f = fertilite;
 
 			float h2 = 0.6f * h;
 			float l2 = 0.6f * l;

@@ -44,6 +44,8 @@ public class ButtonCut : MonoBehaviour
 		Cursor.SetCursor( cursor, new Vector2( 40, 1 ), CursorMode.Auto );
 
 		selected = true;
+
+		Main.msgButtonCut();
 	}
 
 	public void leaveSelection()

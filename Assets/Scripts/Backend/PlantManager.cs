@@ -32,7 +32,7 @@ public class PlantManager : MonoBehaviour
 	public Plant cepe;
 	public Plant tricholome;
 	public Plant amanite;
-	int nbPlants = 9;
+	int nbPlants = 12;
 
 	Plant selectedPlant;
 	GameObject cursorPlant;
@@ -107,6 +107,8 @@ public class PlantManager : MonoBehaviour
 
 					if (!Input.GetKey (KeyCode.LeftShift) && !Input.GetKey (KeyCode.RightShift))
 						leaveSelection ();
+
+					Main.msgInsertArbre();
 				}
 			}
 		}
@@ -176,20 +178,26 @@ public class PlantManager : MonoBehaviour
 		case 0:
 			return sapin;
 		case 1:
-			return bouleau;
+			return saule;
 		case 2:
-			return fougere;
+			return hetre;
 		case 3:
-			return herbe;
+			return bouleau;
 		case 4:
-			return marguerite;
+			return chene;
 		case 5:
-			return lin;
+			return fougere;
 		case 6:
-			return cepe;
+			return herbe;
 		case 7:
-			return tricholome;
+			return marguerite;
 		case 8:
+			return lin;
+		case 9:
+			return cepe;
+		case 10:
+			return tricholome;
+		case 11:
 			return amanite;
 		}
 		return null;

@@ -92,7 +92,10 @@ public class Case
 			if( p.toss( l, h, f ) )
 			{
 				insert( p );
-				Main.msgApparitionFleur();
+				//Main.msgApparitionFleur();
+
+				if ( i == 9 )
+					Main.msgPolypore();
 			}
 		}
 
@@ -163,9 +166,9 @@ public class Case
 		if ( c != null )
 		{
 			c.addProperties(
-				0.10f  * humidite,
-				0.03f * luminosite,
-				0.06f * fertilite );
+				0.08f  * humidite,
+				0.01f * luminosite,
+				0.07f * fertilite );
 		}
 	}
 
