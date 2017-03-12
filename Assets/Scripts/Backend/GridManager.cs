@@ -177,9 +177,10 @@ public class GridManager : MonoBehaviour
 		}
 
 		diversite = 0;
+		float factor = 40.0f / (size*size);
 		foreach( KeyValuePair<string,int> pair in dico )
 		{
-			float d = Mathf.Min( (pair.Value / 15.0f), 1.0f );
+			float d = Mathf.Min( (pair.Value * factor), 1.0f );
 			diversite += d;
 		}
 

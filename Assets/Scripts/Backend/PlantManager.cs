@@ -17,6 +17,7 @@ public class PlantManager : MonoBehaviour
 	public float xMargin, yMargin;
 	public GameObject buttonPrefab;
 	public GameObject uiManager;
+	public Text buttonDesc;
 	GameObject[,] icons;
 
 	// Plant prefabs
@@ -206,5 +207,24 @@ public class PlantManager : MonoBehaviour
 	public int getNbPlants()
 	{
 		return nbPlants;
+	}
+
+	public void buttonDescription( Plant p )
+	{
+		if ( p == null )
+		{
+			buttonDesc.text = "";
+		}
+		else
+		{
+			buttonDesc.text = "<b>" + p.theName + "</b>\n"
+				+ "Prix : " + p.cost + "\n"
+				+ "<i>" + p.description + "</i>";
+		}
+	}
+
+	public bool isSelected()
+	{
+		return selectedPlant != null;
 	}
 }

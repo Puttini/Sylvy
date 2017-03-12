@@ -46,9 +46,9 @@ public class Menu : MonoBehaviour
 
 	public void facile()
 	{
-		Main.get().money = 10000;
-		Main.get().subvention = 200;
-		Main.get().timeScale = 2;
+		Main.get().money = 3000;
+		Main.get().subvention = 50;
+		Main.get().timeScale = 1.5f;
 		GridManager.get().size = 25;
 		Main.get().pauseButton.SetActive( true );
 		startNewGame();
@@ -56,7 +56,7 @@ public class Menu : MonoBehaviour
 
 	public void normal()
 	{
-		Main.get().money = 8000;
+		Main.get().money = 1500;
 		Main.get().subvention = 0;
 		Main.get().timeScale = 1.5f;
 		GridManager.get().size = 35;
@@ -66,7 +66,7 @@ public class Menu : MonoBehaviour
 
 	public void difficile()
 	{
-		Main.get().money = 6000;
+		Main.get().money = 1000;
 		Main.get().subvention = -50;
 		Main.get().timeScale = 1;
 		GridManager.get().size = 50;

@@ -144,6 +144,9 @@ public class BasicPlant : MonoBehaviour, CaseActor
 		hmax = b.hmax;
 		lmin = b.lmin;
 		lmax = b.lmax;
+		fmin = b.fmin;
+		fmax = b.fmax;
+		dmin = b.dmin;
 
 		pDie = b.pDie;
 

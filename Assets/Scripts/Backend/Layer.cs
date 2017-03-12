@@ -175,7 +175,8 @@ public class Layer
 			if ( objs[i] != null )
 			{
 				AssignedPlant p = objs[i].GetComponent<AssignedPlant>();
-				if ( p != null )
+				Mort m = objs[i].GetComponent<Mort>();
+				if ( p != null && m == null )
 				{
 					string n = p.get().theName;
 					if ( dico.ContainsKey(n) )

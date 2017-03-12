@@ -84,25 +84,26 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	// Update is called once per frame
 	void Update()
 	{
+		float t = Main.time();
+		float scale;
 		if ( !isDead )
 		{
-			float t = Main.time();
 			float dt = t - lastUpdate;
 			age += dt * GetComponent< AssignedCase >().get().getFertilite();
-			lastUpdate = t;
 
-			float scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
+			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
 
 			if ( inc == null && scale >= 0.6 )
 				inc = Main.addIncome( income, period );
-
-			transform.localScale = scale * finalScale;
-			IsoTransform iso = GetComponent<IsoTransform>();
-			iso.Size = scale * finalSize;
-			iso.Position = new Vector3( iso.Position.x, scale * finalY, iso.Position.z );
 		}
 		else
-			lastUpdate = Main.time();
+			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
+
+		lastUpdate = t;
+		transform.localScale = scale * finalScale;
+		IsoTransform iso = GetComponent<IsoTransform>();
+		iso.Size = scale * finalSize;
+		iso.Position = new Vector3( iso.Position.x, scale * finalY, iso.Position.z );
 	}
 
 	public float getAge()
@@ -199,7 +200,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 
 			if ( GridManager.get().getDiversite() < dmin )
 			{
-				if ( pDie > Main.random() )
+				if ( 3*pDie > Main.random() )
 					die();
 			}
 
@@ -256,6 +257,8 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 
 		if (inc != null)
 			GameObject.Destroy( inc );
+
+		gameObject.AddComponent<Mort>();
 
 		Main.msgArbreMort();
 	}

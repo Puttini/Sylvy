@@ -219,7 +219,9 @@ public class Main : MonoBehaviour
 				"Chaque arbre vous coûte un certain montant à planter ; " +
 				"mais une fois à maturité il vous rapportera un petit peu, ce qui vous permettra de continuer à faire grandir votre forêt !\n" +
 				"Une fois assez grand, vous pouvez décider de couper un arbre pour vendre le son bois, mais cela vous laissera une souche qu'il est coûteux de déraciner." +
-				"\nChoisissez donc soigneusement ce que vous souhaitez planter ! ;)" );
+				"\nChoisissez donc soigneusement ce que vous souhaitez planter ! ;)\n" +
+				"\n" +
+				"Commencez par planter d'autres <b>sapins</b> et <b>bouleaux</b> pour solidifier votre écosystème actuel.\n" );
 			get().ftButtonPlant = false;
 		}
 	}
@@ -232,7 +234,7 @@ public class Main : MonoBehaviour
 				"Couper des arbres",
 				"Devenez bûcheron !",
 
-				"Une fois l'outil <i>hache</i> actif, vous devez sélectionner la case qui contient l'arbre que vous souhaitez couper, (maintenez <i>Shift</li> pour couper plusieurs arbres).\n" +
+				"Une fois l'outil <i>hache</i> actif, vous devez sélectionner la case qui contient l'arbre que vous souhaitez couper, (maintenez <i>Shift</i> pour couper plusieurs arbres).\n" +
 				"Couper un arbre vous rapportera de l'argent en vendant son bois.\n" +
 				"Le montant reversé dépend de l'espèce de l'arbre, de sa taille, et de sa santé (un arbre mort vous rapportera beaucoup moins !)\n" +
 				"\n" +
@@ -263,15 +265,13 @@ public class Main : MonoBehaviour
 		if ( get().ftInsertArbre )
 		{
 			displayNotif(
-				"Insertion d'un arbre",
+				"Effets un arbre",
 				"Conséquences sur l'environnement",
 
 				"A chaque fois que vous plantez un arbre, vous agissez sur l'environnement.\n" +
-				"Certains arbres favoriseront/défavoriseront l'humidité des cases proches, la flore, et la fertilité.\n" +
+				"Certains arbres favoriseront/défavoriseront l'<b>humidité</b> des cases proches, la <b>luminosité</b>, et la <b>fertilité</b>.\n" +
 				"Ceci permet de faire naturellement pousser des espèces d'herbe, de fleurs et de champignons, qui à leur tour agiront sur l'environnement.\n" +
-				"C'est ainsi que vous allez progressivement forger l'écosystème de votre forêt.\n" +
-				"\n" +
-				"Commencez par planter d'autres sapins et bouleaux pour solidifier votre écosystème actuel.\n" );
+				"C'est ainsi que vous allez progressivement forger l'écosystème de votre forêt.\n" );
 			get().ftInsertArbre = false;
 		}
 	}
@@ -301,7 +301,7 @@ public class Main : MonoBehaviour
 				"Obtenir un écosystème complet",
 
 				"Votre diversité a dépassé 5, bravo !\n" +
-				"Chaque espèce de fleur/herbe/champignon/arbre augmentera votre système, à condition d'en avoir suffisamment en abondance.\n" +
+				"Chaque espèce de fleur/herbe/champignon/arbre augmentera votre diversité, à condition d'en avoir suffisamment en abondance.\n" +
 				"\n" +
 				"La diversité est un bon indicateur de la complexité de votre écosystème.\n" +
 				"Avoir un bon coefficient de diversité vous permettra de faire apparaître encore plus d'espèces, qui nécessitent un environnement complexe.\n" +
@@ -351,11 +351,9 @@ public class Main : MonoBehaviour
 				"Que représentent ces coefficients ?",
 
 				"3 coefficients sont très importants pour déterminer l'impact sur les espèces de chaque case :\n" +
-				"<ul>" +
-				"<li>L'<b>humidité</b> est essentielle pour faire pousser un peu toute sorte de plantes. Certaines espèces sont plus demandantes que d'autres, comme les champignons, d'autres auront besoin que le sol ne soit pas trop inondé." +
-				"<li>La <b>luminosite</b> est très importante pour les fleurs, mais moins pour les champignons." +
-				"<li>La <b>fertilité</b> est très représentative de l'aptitude des fleurs à pousser. Plus ce coefficient est élevé, plus il y aura de plantes, et plus les arbres pousseront vite." +
-				"</ul>\n" +
+				" - L'<b>humidité</b> est essentielle pour faire pousser un peu toute sorte de plantes. Certaines espèces sont plus demandantes que d'autres, comme les champignons, d'autres auront besoin que le sol ne soit pas trop inondé.\n" +
+				" - La <b>luminosite</b> est très importante pour les fleurs, mais moins pour les champignons.\n" +
+				" - La <b>fertilité</b> est très représentative de l'aptitude des fleurs à pousser. Plus ce coefficient est élevé, plus il y aura de plantes, et plus les arbres pousseront vite.\n" +
 				"\n" +
 				"La principale difficulté réside dans le maniement de ces 3 paramètres à l'aide des différentes espèces d'arbres à votre disposition.\n" );
 			get().ftDescription = false;
@@ -370,7 +368,7 @@ public class Main : MonoBehaviour
 				"Des polypores sont apparus",
 				"... mais qu'est-ce que c'est !?",
 
-				"Le <i>polypore</li> est une espèce de champignon \"parasite\" qui vont tenter de se répendre et peuvent tuer vos espèces d'arbre.\n" +
+				"Le <i>polypore</i> est une espèce de champignon \"parasite\" qui vont tenter de se répendre et peuvent tuer vos espèces d'arbre.\n" +
 				"Leur apparition est en générale dûe à un sol humide et peu fertile, accentuera ce phénomène. Il faut vous débarrasser de cette espèce au plus vite !\n" +
 				"Tentez d'augmenter la fertilité des cases proches, et arraches les souches qui baissent la fertilité.\n" );
 			get().ftPolypore = false;

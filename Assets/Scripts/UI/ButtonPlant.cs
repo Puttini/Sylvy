@@ -20,5 +20,19 @@ public class ButtonPlant : MonoBehaviour
 		Main.msgButtonPlant();
 
 		PlantManager.get().setSelectedPlant( plant );
+
+		PlantManager.get().buttonDescription(plant);
+	}
+
+	public void pointerEnter()
+	{
+		if ( !PlantManager.get().isSelected() )
+			PlantManager.get().buttonDescription(plant);
+	}
+
+	public void pointerExit()
+	{
+		if ( !PlantManager.get().isSelected() )
+			PlantManager.get().buttonDescription(null);
 	}
 }

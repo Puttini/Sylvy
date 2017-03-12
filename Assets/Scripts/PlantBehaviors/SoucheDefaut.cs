@@ -24,7 +24,7 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 
 		this.age = age;
 		this.isDead = dead;
-		this.uprootCost = (int)(size * uprootCost);
+		this.uprootCost = (int)(size * cost);
 
 		h = humidite;
 		l = luminosite;

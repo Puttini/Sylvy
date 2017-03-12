@@ -5,6 +5,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
 	public string theName;
+	public string description;
 
 	public GameObject sprite;
 	public GameObject previewPrefab;
@@ -65,6 +66,7 @@ public class Plant : MonoBehaviour
 		if ( GridManager.get().getDiversite() < dmin )
 			return false;
 
-		return (p * f > Main.random ());
+		float c = Mathf.Max(f, 0.1f);
+		return (p * c > Main.random ());
 	}
 }

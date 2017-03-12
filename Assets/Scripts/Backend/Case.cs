@@ -215,6 +215,9 @@ public class Case
 		if ( tree != null )
 		{
 			txt += "<b>" + tree.name + "</b>\n";
+			AssignedPlant ap = tree.GetComponent<AssignedPlant>();
+			if ( ap != null )
+				txt += "<i>" + ap.get().description + "</i>\n";
 
 			Cuttable cut = tree.GetComponent<Cuttable>();
 			if ( cut != null )
