@@ -251,7 +251,7 @@ public class Main : MonoBehaviour
 				"Déraciner une souche",
 				"Quelles conséquences",
 
-				"Une fois l'outil <i>pelle</i> actif, vous devez sélectionner la case qui contient la souche que vous souhaitez déraciner, (maintenez <i>Shift</li> pour déraciner plusieurs souches).\n" +
+				"Une fois l'outil <i>pelle</i> actif, vous devez sélectionner la case qui contient la souche que vous souhaitez déraciner, (maintenez <i>Shift</i> pour déraciner plusieurs souches).\n" +
 				"Déraciner un arbre vous coûtera de l'argent, en fonction de l'espèce et de la taille de la souche.\n" +
 				"En plus de cela, vous arracherez des plantes aux alentours pendant l'opération, et dégradera temporairement la qualité du sol.\n" +
 				"\n" +
@@ -265,7 +265,7 @@ public class Main : MonoBehaviour
 		if ( get().ftInsertArbre )
 		{
 			displayNotif(
-				"Effets un arbre",
+				"Effets d'un arbre",
 				"Conséquences sur l'environnement",
 
 				"A chaque fois que vous plantez un arbre, vous agissez sur l'environnement.\n" +
@@ -368,9 +368,9 @@ public class Main : MonoBehaviour
 				"Des polypores sont apparus",
 				"... mais qu'est-ce que c'est !?",
 
-				"Le <i>polypore</i> est une espèce de champignon \"parasite\" qui vont tenter de se répendre et peuvent tuer vos espèces d'arbre.\n" +
-				"Leur apparition est en générale dûe à un sol humide et peu fertile, accentuera ce phénomène. Il faut vous débarrasser de cette espèce au plus vite !\n" +
-				"Tentez d'augmenter la fertilité des cases proches, et arraches les souches qui baissent la fertilité.\n" );
+				"Le <i>polypore</i> est une espèce de champignon \"parasite\" qui va tenter de se répandre et peut tuer les espèces environnantes.\n" +
+				"Leur apparition est en générale due à un sol humide et peu fertile. Il faut vous débarrasser de cette espèce au plus vite !\n" +
+				"Tentez d'augmenter la fertilité des cases proches, et d'arracher les souches et arbres morts qui baissent la fertilité.\n" );
 			get().ftPolypore = false;
 		}
 	}

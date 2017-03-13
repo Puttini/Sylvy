@@ -250,7 +250,7 @@ public class Case
 		return false;
 	}
 
-	public void addToDico( Dictionary<string,int> dico )
+	public void addToDico( Dictionary<string,float> dico )
 	{
 		for( int i = 0 ; i < (int)Layers.NbLayers ; ++i )
 			layers[i].addToDico(dico);

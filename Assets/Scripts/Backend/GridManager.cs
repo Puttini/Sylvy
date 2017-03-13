@@ -169,7 +169,7 @@ public class GridManager : MonoBehaviour
 
 	public void calculDiversite()
 	{
-		Dictionary<string,int> dico = new Dictionary<string,int>();
+		Dictionary<string,float> dico = new Dictionary<string,float>();
 		for( int i = 0 ; i < size ; ++i )
 		{
 			for( int j = 0 ; j < size ; ++j )
@@ -178,7 +178,7 @@ public class GridManager : MonoBehaviour
 
 		diversite = 0;
 		float factor = 40.0f / (size*size);
-		foreach( KeyValuePair<string,int> pair in dico )
+		foreach( KeyValuePair<string,float> pair in dico )
 		{
 			float d = Mathf.Min( (pair.Value * factor), 1.0f );
 			diversite += d;

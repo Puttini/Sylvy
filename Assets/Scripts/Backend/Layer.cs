@@ -168,7 +168,7 @@ public class Layer
 		return false;
 	}
 
-	public void addToDico( Dictionary<string,int> dico )
+	public void addToDico( Dictionary<string,float> dico )
 	{
 		for( int i = 0 ; i < 4 ; ++i )
 		{
@@ -180,7 +180,7 @@ public class Layer
 				{
 					string n = p.get().theName;
 					if ( dico.ContainsKey(n) )
-						dico[n]++;
+						dico[n] += p.get().diversImpact;
 					else
 						dico[n] = 1;
 				}

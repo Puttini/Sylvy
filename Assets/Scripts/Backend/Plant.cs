@@ -23,6 +23,8 @@ public class Plant : MonoBehaviour
 	public int layer;
 	public int cost;
 
+	public float diversImpact;
+
 	int nbPrefabs;
 	public int getNbPrefabs() { return nbPrefabs; }
 
