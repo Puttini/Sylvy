@@ -118,6 +118,9 @@ public class Main : MonoBehaviour
 		GridManager.get().reset();
 		foreach( Transform inc in get().incomes.transform )
 			GameObject.Destroy( inc.gameObject );
+
+		get().unpauseButton.SetActive( false );
+		get().pauseButton.SetActive( true );
 	}
 
 	public static void pause()

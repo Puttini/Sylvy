@@ -97,6 +97,8 @@ public class GridManager : MonoBehaviour
 
 	public bool uproot( int i, int j )
 	{
+		if ( i < 0 || i >= size || j < 0 || j >= size )
+			return false;
 		return grid [i, j].uproot();
 	}
 
@@ -159,7 +161,7 @@ public class GridManager : MonoBehaviour
 					tree = grid[i,j].insert( PlantManager.get().sapin );
 
 				if ( tree != null )
-					tree.GetComponent<ArbreDefaut>().setAge( (0.4f + 0.7f*Main.random()) * 300.0f );
+					tree.GetComponent<ArbreDefaut>().setAge( (0.4f + 0.7f*Main.random()) * 450.0f );
 			}
 		}
 

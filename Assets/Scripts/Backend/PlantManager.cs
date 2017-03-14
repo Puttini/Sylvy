@@ -59,6 +59,7 @@ public class PlantManager : MonoBehaviour
 		addToPanel( hetre );
 		addToPanel( bouleau );
 		addToPanel( chene );
+		/*
 		addToPanel( fougere );
 		addToPanel( herbe );
 		addToPanel( marguerite );
@@ -66,6 +67,7 @@ public class PlantManager : MonoBehaviour
 		addToPanel( cepe );
 		addToPanel( tricholome );
 		addToPanel( amanite );
+		*/
 	}
 
 	public void addToPanel( Plant p )

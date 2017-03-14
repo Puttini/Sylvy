@@ -25,14 +25,18 @@ public class CameraController : MonoBehaviour
 		float x = transform.position.x;
 		float y = transform.position.y;
 
-		Vector3 left = (Vector3)Isometric.IsoToScreen( new Vector3(1,0,GridManager.get().size) );
-		xmin = left.x + x;
-		Vector3 right = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size,0,1) );
-		xmax = right.x + x;
-		Vector3 bottom = (Vector3)Isometric.IsoToScreen( new Vector3(1,0,1) );
-		ymin = bottom.y + y;
-		Vector3 top = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size,0,GridManager.get().size) );
-		ymax = top.y + y;
+		Camera camera = GetComponent<Camera>();
+		Vector3 p = camera.ScreenToWorldPoint(new Vector3(0, 0, camera.nearClipPlane));
+		Vector3 b = camera.ScreenToWorldPoint(new Vector3(0, 150, camera.nearClipPlane));
+
+		Vector3 left = (Vector3)Isometric.IsoToScreen( new Vector3(0,0,GridManager.get().size+1) );
+		xmin = left.x + x - p.x;
+		Vector3 right = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size+1,0,0) );
+		xmax = right.x - x + p.x;
+		Vector3 bottom = (Vector3)Isometric.IsoToScreen( new Vector3(0,0,0) );
+		ymin = bottom.y + b.y - p.y;
+		Vector3 top = (Vector3)Isometric.IsoToScreen( new Vector3(GridManager.get().size+2,0,GridManager.get().size+2) );
+		ymax = top.y - y + p.y;
 
 		lastFrame = (float)Time.time;
 	}

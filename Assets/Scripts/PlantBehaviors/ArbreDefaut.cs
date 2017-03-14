@@ -4,7 +4,7 @@ using Assets.UltimateIsometricToolkit.Scripts.Core;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
 using UnityEngine;
 
-public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
+public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor, Datable
 {
 	public float income;
 	public float period;
@@ -49,12 +49,14 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	Vector3 finalSize;
 	Vector3 finalScale;
 	float age;
+	float age2;
 	GameObject inc;
 	bool isDead;
 
 	ArbreDefaut()
 	{
 		age = 0;
+		age2 = 0;
 		isDead = false;
 	}
 
@@ -74,6 +76,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		finalY *= adultSize;
 		finalSize *= adultSize;
 		finalScale *= adultSize;
+		transform.localScale = new Vector3();
 
 		// Changing alpha
 		Color c = GetComponent<SpriteRenderer>().color;
@@ -89,15 +92,16 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		if ( !isDead )
 		{
 			float dt = t - lastUpdate;
-			age += dt * GetComponent< AssignedCase >().get().getFertilite();
+			age += dt;
+			age2 += dt * (0.5f + 0.5f*GetComponent< AssignedCase >().get().getFertilite());
 
-			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
+			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age2 / growingTime );
 
 			if ( inc == null && scale >= 0.6 )
 				inc = Main.addIncome( income, period );
 		}
 		else
-			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age / growingTime );
+			scale = 0.3f + 0.7f*Mathf.Min( 1.0f, age2 / growingTime );
 
 		lastUpdate = t;
 		transform.localScale = scale * finalScale;
@@ -106,9 +110,9 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		iso.Position = new Vector3( iso.Position.x, scale * finalY, iso.Position.z );
 	}
 
-	public float getAge()
+	public int getAge()
 	{
-		return age;
+		return (int)age / 10;
 	}
 
 	public GameObject cut()
@@ -119,7 +123,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		IsoTransform iso1 = GetComponent<IsoTransform>();
 		IsoTransform iso2 = newTronc.GetComponent<IsoTransform>();
 		iso2.Position = new Vector3( iso1.Position.x, iso2.Position.y, iso1.Position.z );
-		float scale = 0.4f + 0.6f*Mathf.Min( 1.0f, age / growingTime );
+		float scale = 0.4f + 0.6f*Mathf.Min( 1.0f, age2 / growingTime );
 
 		float h = isDead ? sDeadHumidite : sHumidite;
 		float l = isDead ? sDeadLuminosite : sLuminosite;
@@ -138,7 +142,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 
 	public int getCutPrice()
 	{
-		float scale2 = Mathf.Min( 1.0f, age / growingTime );
+		float scale2 = Mathf.Min( 1.0f, age2 / growingTime );
 		float c;
 		if ( isDead )
 			c = (scale2 * cutDeadIncome);
@@ -150,6 +154,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 	public void setAge( float a )
 	{
 		age = a;
+		age2 = a;
 	}
 
 	public void updateCase( Case c )
@@ -212,7 +217,7 @@ public class ArbreDefaut : MonoBehaviour, Cuttable, CaseActor
 		}
 
 
-		float scale = Mathf.Min( 1.0f, age / growingTime );
+		float scale = Mathf.Min( 1.0f, age2 / growingTime );
 		h = 0.7f + 0.3f*scale;
 		l = 0.2f + 0.8f*scale;
 		f = 0.5f + 0.5f*scale;

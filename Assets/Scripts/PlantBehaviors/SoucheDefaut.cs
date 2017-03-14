@@ -4,7 +4,7 @@ using UnityEngine;
 using Assets.UltimateIsometricToolkit.Scripts.Core;
 using Assets.UltimateIsometricToolkit.Scripts.Utils;
 
-public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
+public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor, Datable
 {
 	float age;
 	int uprootCost;
@@ -13,7 +13,6 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 
 	float h, l, f;
 
-	public float getAge() { return age; }
 	public void setProperties( float age, float scale, bool dead, float cost, float humidite, float luminosite, float fertilite )
 	{
 		IsoTransform iso = GetComponent<IsoTransform>();
@@ -67,5 +66,10 @@ public class SoucheDefaut : MonoBehaviour, Uprootable, CaseActor
 		gm.addProperties( x  , y+1, h2, l2, f2 );
 		gm.addProperties( x-1, y+1, h2, l2, f2 );
 		gm.addProperties( x-1, y  , h2, l2, f2 );
+	}
+
+	public int getAge()
+	{
+		return (int)age / 10;
 	}
 }

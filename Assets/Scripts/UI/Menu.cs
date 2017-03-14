@@ -68,7 +68,7 @@ public class Menu : MonoBehaviour
 	{
 		Main.get().money = 1000;
 		Main.get().subvention = -50;
-		Main.get().timeScale = 1;
+		Main.get().timeScale = 1.5f;
 		GridManager.get().size = 50;
 		Main.get().pauseButton.SetActive( false );
 		startNewGame();

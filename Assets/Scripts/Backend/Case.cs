@@ -218,6 +218,10 @@ public class Case
 			AssignedPlant ap = tree.GetComponent<AssignedPlant>();
 			if ( ap != null )
 				txt += "<i>" + ap.get().description + "</i>\n";
+			
+			Datable dat = tree.GetComponent<Datable>();
+			if ( dat != null )
+				txt += "Âge : " + dat.getAge() + " ans\n";
 
 			Cuttable cut = tree.GetComponent<Cuttable>();
 			if ( cut != null )
